@@ -7,195 +7,332 @@
 <title>RikuDrop</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    body {
-        margin: 0;
-        padding: 20px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                     sans-serif;
-        background: #f5f7fb;
-        color: #222;
-    }
+body {
+    margin: 0;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    background: #f4f7fb;
+    color: #222;
+}
+
+.container {
+    width: min(900px, 92%);
+    margin: 40px auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.room-area {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.room-area input {
+    flex: 1;
+    min-width: 180px;
+    padding: 13px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 13px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    background: #222;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.role-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.role-buttons button {
+    flex: 1;
+}
+
+.windows {
+    background: #2563eb;
+}
+
+.iphone {
+    background: #16a34a;
+}
+
+.status {
+    background: #111827;
+    color: #d1fae5;
+    border-radius: 12px;
+    padding: 15px;
+    height: 300px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.connection-state {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 12px;
+    background: #eee;
+    margin-bottom: 15px;
+}
+
+.connected {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.connecting {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.failed {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.file-area {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.file-area input {
+    flex: 1;
+    min-width: 220px;
+}
+
+.progress {
+    margin-top: 15px;
+    height: 12px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #2563eb;
+    transition: width 0.1s;
+}
+
+.received {
+    margin-top: 20px;
+}
+
+.received img {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 12px;
+    display: block;
+    margin-top: 10px;
+}
+
+.small {
+    color: #666;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
 
     .container {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
+        margin: 20px auto;
     }
 
-    h1 {
-        text-align: center;
-        margin: 10px 0 5px;
-        font-size: 32px;
-    }
-
-    .subtitle {
-        text-align: center;
-        color: #777;
-        margin-bottom: 25px;
+    .role-buttons {
+        flex-direction: column;
     }
 
     .card {
-        background: white;
-        border-radius: 18px;
-        padding: 20px;
-        margin-bottom: 16px;
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+        padding: 18px;
     }
-
-    label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-
-    input {
-        width: 100%;
-        padding: 14px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 18px;
-        margin-bottom: 12px;
-    }
-
-    button {
-        width: 100%;
-        border: none;
-        border-radius: 12px;
-        padding: 15px;
-        margin-top: 10px;
-        font-size: 17px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    button:disabled {
-        background: #aaa !important;
-        cursor: not-allowed;
-    }
-
-    .sender {
-        background: #4caf50;
-        color: white;
-    }
-
-    .receiver {
-        background: #2196f3;
-        color: white;
-    }
-
-    .test {
-        background: #673ab7;
-        color: white;
-    }
-
-    #status {
-        background: #f1f3f5;
-        border-radius: 12px;
-        padding: 15px;
-        min-height: 180px;
-        white-space: pre-wrap;
-        word-break: break-word;
-        line-height: 1.6;
-        font-size: 14px;
-    }
-
-    #message {
-        display: none;
-        margin-top: 15px;
-        padding: 15px;
-        border-radius: 12px;
-        background: #e8f5e9;
-        color: #2e7d32;
-        font-weight: bold;
-    }
-
-    .notice {
-        font-size: 14px;
-        color: #666;
-        line-height: 1.6;
-        margin-top: 10px;
-    }
+}
 </style>
 </head>
-
 
 <body>
 
 <div class="container">
 
-    <h1>RikuDrop</h1>
+    <h1>📱 RikuDrop</h1>
 
     <div class="subtitle">
-        iPhone ↔ Windows ファイル転送
+        iPhone ↔ Windows 画像転送
     </div>
 
-
-    <!-- ルーム設定 -->
+    <!-- ルーム -->
     <div class="card">
 
-        <label for="room">
-            ルーム番号
-        </label>
+        <h2>① ルーム番号</h2>
 
-        <input
-            id="room"
-            type="text"
-            value="test"
-            placeholder="例：test"
-            autocomplete="off"
-        >
+        <p>
+            同じルーム番号を2台に入力してください。
+        </p>
 
-        <button
-            id="receiverButton"
-            class="receiver"
-            onclick="startReceiver()"
-        >
-            💻 Windows側として接続
-        </button>
+        <div class="room-area">
 
-        <button
-            id="senderButton"
-            class="sender"
-            onclick="startSender()"
-        >
-            📱 iPhone側として接続
-        </button>
+            <input
+                id="roomId"
+                type="text"
+                value="1234"
+                placeholder="例：1234"
+            >
 
-        <div class="notice">
-            ※ 同じルーム番号を2台で入力してください。<br>
-            ※ 先にWindows側、次にiPhone側を接続してください。
         </div>
 
     </div>
 
+    <!-- 接続 -->
+    <div class="card">
+
+        <h2>② 接続する端末を選択</h2>
+
+        <p class="small">
+            先にWindows、次にiPhoneの順番で接続してください。
+        </p>
+
+        <div class="role-buttons">
+
+            <button
+                class="windows"
+                id="windowsButton"
+                onclick="startConnection('windows')"
+            >
+                💻 Windows側として接続
+            </button>
+
+            <button
+                class="iphone"
+                id="iphoneButton"
+                onclick="startConnection('iphone')"
+            >
+                📱 iPhone側として接続
+            </button>
+
+        </div>
+
+    </div>
 
     <!-- 状態 -->
     <div class="card">
 
-        <h3>通信状態</h3>
+        <h2>③ 通信状態</h2>
 
-        <div id="status">まだ接続していません。</div>
+        <div
+            id="connectionState"
+            class="connection-state"
+        >
+            未接続
+        </div>
 
-        <div id="message"></div>
+        <div
+            id="log"
+            class="status"
+        ></div>
 
     </div>
 
-
-    <!-- テスト -->
+    <!-- ファイル転送 -->
     <div class="card">
 
-        <button
-            id="testButton"
-            class="test"
-            onclick="sendTestMessage()"
-            disabled
+        <h2>④ 画像・ファイル転送</h2>
+
+        <div class="file-area">
+
+            <input
+                id="fileInput"
+                type="file"
+                accept="image/*"
+            >
+
+            <button
+                id="sendButton"
+                onclick="sendFile()"
+                disabled
+            >
+                📤 送信
+            </button>
+
+        </div>
+
+        <div class="progress">
+            <div
+                id="progressBar"
+                class="progress-bar"
+            ></div>
+        </div>
+
+        <p
+            id="progressText"
+            class="small"
         >
-            📡 テストメッセージを送信
-        </button>
+            接続すると送信できます。
+        </p>
+
+    </div>
+
+    <!-- 受信 -->
+    <div class="card">
+
+        <h2>⑤ 受信したファイル</h2>
+
+        <div
+            id="received"
+            class="received"
+        >
+            まだファイルを受信していません。
+        </div>
 
     </div>
 
@@ -205,961 +342,927 @@
 <script>
 
 /* =========================================================
-   Cloudflare Worker
-   ========================================================= */
+   基本設定
+========================================================= */
 
 const WORKER_URL =
     "https://ancient-wind-96c6.rikuhira115.workers.dev";
 
+/*
+ * WebRTC用STUNサーバー
+ *
+ * まずは無料のSTUNを使って接続テストします。
+ */
+const ICE_SERVERS = [
+    {
+        urls: "stun:stun.l.google.com:19302"
+    }
+];
+
 
 /* =========================================================
-   WebRTC / WebSocket 用変数
-   ========================================================= */
+   状態
+========================================================= */
 
-let socket = null;
-
+let ws = null;
 let pc = null;
-
 let dataChannel = null;
-
-let remoteDescriptionSet = false;
-
-let pendingCandidates = [];
 
 let currentRole = null;
 
+let pendingCandidates = [];
+
+let remoteDescriptionSet = false;
+
+let incomingFile = null;
+
 
 /* =========================================================
-   ログ表示
-   ========================================================= */
+   HTML取得
+========================================================= */
+
+const roomInput =
+    document.getElementById("roomId");
+
+const logArea =
+    document.getElementById("log");
+
+const connectionState =
+    document.getElementById("connectionState");
+
+const sendButton =
+    document.getElementById("sendButton");
+
+const fileInput =
+    document.getElementById("fileInput");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+const progressText =
+    document.getElementById("progressText");
+
+const receivedArea =
+    document.getElementById("received");
+
+
+/* =========================================================
+   ログ
+========================================================= */
 
 function log(message) {
-
-    const status =
-        document.getElementById("status");
 
     const now =
         new Date().toLocaleTimeString();
 
-    status.textContent +=
-        "\n[" + now + "] " + message;
+    logArea.textContent +=
+        `[${now}] ${message}\n`;
 
-    status.scrollTop =
-        status.scrollHeight;
-
+    logArea.scrollTop =
+        logArea.scrollHeight;
 }
 
 
 /* =========================================================
-   ボタン制御
-   ========================================================= */
+   接続状態表示
+========================================================= */
 
-function disableConnectionButtons() {
+function setConnectionState(
+    text,
+    type = ""
+) {
 
-    document
-        .getElementById("senderButton")
-        .disabled = true;
+    connectionState.textContent =
+        text;
 
-    document
-        .getElementById("receiverButton")
-        .disabled = true;
-
-}
-
-
-function enableConnectionButtons() {
-
-    document
-        .getElementById("senderButton")
-        .disabled = false;
-
-    document
-        .getElementById("receiverButton")
-        .disabled = false;
-
+    connectionState.className =
+        "connection-state " + type;
 }
 
 
 /* =========================================================
-   Cloudflare WebSocket接続
-   ========================================================= */
+   WebSocket送信
+========================================================= */
 
-function connectSignaling() {
-
-    return new Promise((resolve, reject) => {
-
-        const room =
-            document
-                .getElementById("room")
-                .value
-                .trim();
-
-
-        if (!room) {
-
-            alert(
-                "ルーム番号を入力してください"
-            );
-
-            reject(
-                new Error(
-                    "ルーム番号がありません"
-                )
-            );
-
-            return;
-        }
-
-
-        const wsURL =
-            WORKER_URL
-                .replace(
-                    "https://",
-                    "wss://"
-                )
-            + "/room/"
-            + encodeURIComponent(room);
-
-
-        log(
-            "Cloudflareに接続しています..."
-        );
-
-
-        socket =
-            new WebSocket(wsURL);
-
-
-        /* -----------------------------------------
-           WebSocket接続成功
-           ----------------------------------------- */
-
-        socket.onopen = () => {
-
-            log(
-                "✓ Cloudflare WebSocket接続成功"
-            );
-
-            resolve();
-
-        };
-
-
-        /* -----------------------------------------
-           Cloudflareからメッセージ受信
-           ----------------------------------------- */
-
-        socket.onmessage = async (event) => {
-
-            try {
-
-                const message =
-                    JSON.parse(event.data);
-
-                await handleSignalingMessage(
-                    message
-                );
-
-            }
-            catch (error) {
-
-                console.error(error);
-
-                log(
-                    "受信データ処理エラー: "
-                    + error.message
-                );
-
-            }
-
-        };
-
-
-        /* -----------------------------------------
-           WebSocketエラー
-           ----------------------------------------- */
-
-        socket.onerror = (error) => {
-
-            console.error(
-                "WebSocket error:",
-                error
-            );
-
-            log(
-                "✕ WebSocketエラー"
-            );
-
-            reject(
-                new Error(
-                    "WebSocket接続に失敗しました"
-                )
-            );
-
-        };
-
-
-        /* -----------------------------------------
-           WebSocket終了
-           ----------------------------------------- */
-
-        socket.onclose = () => {
-
-            log(
-                "Cloudflare WebSocket接続終了"
-            );
-
-        };
-
-    });
-
-}
-
-
-/* =========================================================
-   Cloudflareへシグナリングデータを送信
-   ========================================================= */
-
-function sendSignal(message) {
+function sendSignal(data) {
 
     if (
-        !socket ||
-        socket.readyState !== WebSocket.OPEN
+        !ws ||
+        ws.readyState !== WebSocket.OPEN
     ) {
 
         log(
-            "⚠ WebSocketが接続されていません"
+            "× Cloudflare WebSocketが接続されていません"
         );
 
         return false;
-
     }
 
-
-    socket.send(
-        JSON.stringify(message)
+    ws.send(
+        JSON.stringify(data)
     );
 
     return true;
-
 }
 
 
 /* =========================================================
-   WebRTC PeerConnection作成
-   ========================================================= */
+   接続開始
+========================================================= */
+
+async function startConnection(role) {
+
+    /*
+     * 既存接続を終了
+     */
+    cleanup();
+
+    currentRole = role;
+
+    const roomId =
+        roomInput.value.trim();
+
+    if (!roomId) {
+
+        alert(
+            "ルーム番号を入力してください。"
+        );
+
+        return;
+    }
+
+    logArea.textContent = "";
+
+    if (role === "windows") {
+
+        log(
+            "Windows側として接続を開始します"
+        );
+
+    } else {
+
+        log(
+            "iPhone側として接続を開始します"
+        );
+
+    }
+
+    setConnectionState(
+        "Cloudflareへ接続中...",
+        "connecting"
+    );
+
+    const roomUrl =
+        WORKER_URL +
+        "/room/" +
+        encodeURIComponent(roomId);
+
+    log(
+        "Cloudflareに接続しています..."
+    );
+
+    try {
+
+        ws =
+            new WebSocket(roomUrl);
+
+    } catch (error) {
+
+        log(
+            "× WebSocket作成失敗: " +
+            error.message
+        );
+
+        setConnectionState(
+            "接続失敗",
+            "failed"
+        );
+
+        return;
+    }
+
+
+    /* =====================================================
+       WebSocket接続成功
+    ===================================================== */
+
+    ws.onopen = async () => {
+
+        log(
+            "✓ Cloudflare WebSocket接続成功"
+        );
+
+        log(
+            "✓ Cloudflare接続完了"
+        );
+
+        /*
+         * WebRTCを準備
+         */
+        createPeerConnection();
+
+        if (role === "windows") {
+
+            log(
+                "WebRTC受信準備をしています..."
+            );
+
+            log(
+                "✓ Windows側の準備完了"
+            );
+
+            log(
+                "iPhone側の接続を待っています..."
+            );
+
+        } else {
+
+            log(
+                "WebRTCを開始します..."
+            );
+
+            /*
+             * iPhone側がDataChannelを作る
+             */
+            dataChannel =
+                pc.createDataChannel(
+                    "rikuDrop"
+                );
+
+            setupDataChannel(
+                dataChannel
+            );
+
+            await createOffer();
+        }
+    };
+
+
+    /* =====================================================
+       WebSocket受信
+    ===================================================== */
+
+    ws.onmessage = async (event) => {
+
+        try {
+
+            const message =
+                JSON.parse(event.data);
+
+            await handleSignal(
+                message
+            );
+
+        } catch (error) {
+
+            log(
+                "× 受信データ処理エラー: " +
+                error.message
+            );
+
+        }
+
+    };
+
+
+    ws.onerror = () => {
+
+        log(
+            "× Cloudflare WebSocketエラー"
+        );
+
+        setConnectionState(
+            "Cloudflare接続エラー",
+            "failed"
+        );
+    };
+
+
+    ws.onclose = () => {
+
+        log(
+            "Cloudflare WebSocket接続終了"
+        );
+
+    };
+}
+
+
+/* =========================================================
+   WebRTC作成
+========================================================= */
 
 function createPeerConnection() {
 
     pc =
         new RTCPeerConnection({
-
-            iceServers: [
-
-                {
-                    urls:
-                        "stun:stun.l.google.com:19302"
-                }
-
-            ]
-
+            iceServers: ICE_SERVERS
         });
 
 
-    /* -----------------------------------------
-       ICE候補
-       ----------------------------------------- */
+    /*
+     * ICE候補
+     *
+     * ここが今回の重要ポイント
+     */
+    pc.onicecandidate = (event) => {
 
-    pc.onicecandidate =
-        (event) => {
-
-            if (event.candidate) {
-
-                sendSignal({
-
-                    type: "ice",
-
-                    candidate:
-                        event.candidate
-
-                });
-
-            }
-
-        };
-
-
-    /* -----------------------------------------
-       WebRTC接続状態
-       ----------------------------------------- */
-
-    pc.onconnectionstatechange =
-        () => {
+        if (event.candidate) {
 
             log(
-                "WebRTC状態: "
-                + pc.connectionState
+                "📡 ICE候補を相手へ送信"
             );
 
+            sendSignal({
 
-            if (
-                pc.connectionState ===
-                "connected"
-            ) {
+                type: "ice-candidate",
 
-                log(
-                    "🎉 iPhoneとWindowsが接続されました！"
-                );
+                candidate:
+                    event.candidate.toJSON()
 
-            }
+            });
+        }
 
-
-            if (
-                pc.connectionState ===
-                "failed"
-            ) {
-
-                log(
-                    "✕ WebRTC接続に失敗しました"
-                );
-
-            }
+    };
 
 
-            if (
-                pc.connectionState ===
-                "disconnected"
-            ) {
-
-                log(
-                    "⚠ WebRTC接続が切断されました"
-                );
-
-            }
-
-        };
-
-
-    /* -----------------------------------------
-       ICE接続状態
-       ----------------------------------------- */
-
+    /*
+     * ICE状態
+     */
     pc.oniceconnectionstatechange =
         () => {
 
-            console.log(
-                "ICE状態:",
+            log(
+                "ICE状態: " +
                 pc.iceConnectionState
             );
 
         };
 
 
-    /* -----------------------------------------
-       受信側でDataChannelを受け取る
-       ----------------------------------------- */
+    /*
+     * ICE候補収集中の状態
+     */
+    pc.onicegatheringstatechange =
+        () => {
 
+            log(
+                "ICE候補収集: " +
+                pc.iceGatheringState
+            );
+
+        };
+
+
+    /*
+     * WebRTC全体の接続状態
+     */
+    pc.onconnectionstatechange =
+        () => {
+
+            const state =
+                pc.connectionState;
+
+            log(
+                "WebRTC状態: " +
+                state
+            );
+
+
+            if (state === "connected") {
+
+                setConnectionState(
+                    "🟢 接続成功",
+                    "connected"
+                );
+
+                log(
+                    "✓ WebRTC接続成功！"
+                );
+
+                if (
+                    dataChannel &&
+                    dataChannel.readyState === "open"
+                ) {
+
+                    sendButton.disabled =
+                        false;
+
+                }
+
+            }
+
+
+            if (state === "connecting") {
+
+                setConnectionState(
+                    "🟡 WebRTC接続中...",
+                    "connecting"
+                );
+
+            }
+
+
+            if (state === "failed") {
+
+                setConnectionState(
+                    "🔴 WebRTC接続失敗",
+                    "failed"
+                );
+
+                log(
+                    "× WebRTC接続に失敗しました"
+                );
+
+                log(
+                    "ICE候補を確認してください"
+                );
+
+            }
+
+
+            if (state === "disconnected") {
+
+                setConnectionState(
+                    "🟠 WebRTC切断",
+                    "failed"
+                );
+
+            }
+
+        };
+
+
+    /*
+     * Windows側は
+     * iPhoneが作ったDataChannelを受け取る
+     */
     pc.ondatachannel =
         (event) => {
 
             log(
-                "✓ DataChannelを受信しました"
+                "📩 DataChannelを受信しました"
             );
 
             dataChannel =
                 event.channel;
 
-            setupDataChannel();
-
-        };
-
-}
-
-
-/* =========================================================
-   DataChannel設定
-   ========================================================= */
-
-function setupDataChannel() {
-
-    if (!dataChannel) {
-
-        return;
-
-    }
-
-
-    /* -----------------------------------------
-       接続開始
-       ----------------------------------------- */
-
-    dataChannel.onopen =
-        () => {
-
-            log(
-                "✓ DataChannel接続成功"
-            );
-
-
-            document
-                .getElementById("testButton")
-                .disabled = false;
-
-        };
-
-
-    /* -----------------------------------------
-       接続終了
-       ----------------------------------------- */
-
-    dataChannel.onclose =
-        () => {
-
-            log(
-                "DataChannelが閉じられました"
-            );
-
-
-            document
-                .getElementById("testButton")
-                .disabled = true;
-
-        };
-
-
-    /* -----------------------------------------
-       エラー
-       ----------------------------------------- */
-
-    dataChannel.onerror =
-        (error) => {
-
-            console.error(error);
-
-            log(
-                "✕ DataChannelエラー"
+            setupDataChannel(
+                dataChannel
             );
 
         };
 
 
-    /* -----------------------------------------
-       データ受信
-       ----------------------------------------- */
-
-    dataChannel.onmessage =
+    /*
+     * ICE候補取得エラー
+     */
+    pc.onicecandidateerror =
         (event) => {
 
             log(
-                "📩 受信: "
-                + event.data
+                "⚠ ICE候補エラー: " +
+                (
+                    event.errorText ||
+                    "unknown"
+                )
             );
 
-
-            const message =
-                document.getElementById(
-                    "message"
-                );
-
-
-            message.style.display =
-                "block";
-
-
-            message.textContent =
-                "📩 受信しました: "
-                + event.data;
-
         };
-
 }
 
 
 /* =========================================================
-   iPhone側
-   ========================================================= */
+   Offer作成
+========================================================= */
 
-async function startSender() {
-
-    currentRole =
-        "sender";
-
-
-    disableConnectionButtons();
-
-
-    document
-        .getElementById("status")
-        .textContent =
-            "iPhone側として接続を開始します";
-
+async function createOffer() {
 
     try {
-
-        /* -------------------------------------
-           まずCloudflare接続を完了させる
-           ------------------------------------- */
-
-        await connectSignaling();
-
-
-        /* -------------------------------------
-           WebRTC開始
-           ------------------------------------- */
-
-        log(
-            "WebRTCを開始します..."
-        );
-
-
-        createPeerConnection();
-
-
-        /* -------------------------------------
-           iPhone側がDataChannelを作る
-           ------------------------------------- */
-
-        dataChannel =
-            pc.createDataChannel(
-                "RikuDrop"
-            );
-
-
-        setupDataChannel();
-
-
-        /* -------------------------------------
-           Offer作成
-           ------------------------------------- */
 
         log(
             "Offerを作成しています..."
         );
 
-
         const offer =
             await pc.createOffer();
-
 
         await pc.setLocalDescription(
             offer
         );
 
-
         log(
             "✓ Offerを作成しました"
         );
 
+        /*
+         * SDPを送信
+         *
+         * ICE候補は onicecandidate
+         * から別途送信されます。
+         */
+        sendSignal({
 
-        /* -------------------------------------
-           Offer送信
-           ------------------------------------- */
+            type: "offer",
 
-        const sent =
-            sendSignal({
+            offer:
+                pc.localDescription
 
-                type: "offer",
-
-                offer:
-                    pc.localDescription
-
-            });
-
-
-        if (sent) {
-
-            log(
-                "✓ OfferをWindowsへ送信しました"
-            );
-
-        }
-
-    }
-    catch (error) {
-
-        console.error(error);
+        });
 
         log(
-            "✕ iPhone側の接続に失敗しました"
+            "✓ OfferをWindowsへ送信しました"
         );
+
+    } catch (error) {
 
         log(
-            "エラー: "
-            + error.message
+            "× Offer作成失敗: " +
+            error.message
         );
 
-        enableConnectionButtons();
-
     }
-
 }
 
 
 /* =========================================================
-   Windows側
-   ========================================================= */
+   Answer作成
+========================================================= */
 
-async function startReceiver() {
-
-    currentRole =
-        "receiver";
-
-
-    disableConnectionButtons();
-
-
-    document
-        .getElementById("status")
-        .textContent =
-            "Windows側として接続を開始します";
-
+async function createAnswer(
+    offer
+) {
 
     try {
 
-        /* -------------------------------------
-           Cloudflare接続
-           ------------------------------------- */
-
-        await connectSignaling();
-
-
-        /* -------------------------------------
-           WebRTC開始
-           ------------------------------------- */
-
         log(
-            "✓ Cloudflare接続完了"
+            "Offerを設定しています..."
         );
-
-
-        log(
-            "WebRTC受信準備をしています..."
-        );
-
-
-        createPeerConnection();
-
-
-        log(
-            "✓ Windows側の準備完了"
-        );
-
-
-        log(
-            "iPhone側の接続を待っています..."
-        );
-
-    }
-    catch (error) {
-
-        console.error(error);
-
-        log(
-            "✕ Windows側の接続に失敗しました"
-        );
-
-        log(
-            "エラー: "
-            + error.message
-        );
-
-        enableConnectionButtons();
-
-    }
-
-}
-
-
-/* =========================================================
-   シグナリング処理
-   ========================================================= */
-
-async function handleSignalingMessage(
-    message
-) {
-
-    console.log(
-        "シグナリング受信:",
-        message
-    );
-
-
-    /* =====================================================
-       Offerを受信
-       ===================================================== */
-
-    if (
-        message.type === "offer"
-    ) {
-
-        log(
-            "📨 Offerを受信しました"
-        );
-
-
-        /*
-         * Windows側にPeerConnectionが
-         * なければ作成する
-         */
-
-        if (!pc) {
-
-            createPeerConnection();
-
-        }
-
-
-        /* -------------------------------------
-           Remote Description設定
-           ------------------------------------- */
 
         await pc.setRemoteDescription(
-
             new RTCSessionDescription(
-                message.offer
+                offer
             )
-
         );
-
 
         remoteDescriptionSet =
             true;
-
 
         log(
             "✓ Offerを設定しました"
         );
 
 
-        /* -------------------------------------
-           保留していたICE候補を追加
-           ------------------------------------- */
+        /*
+         * 待機していたICE候補を追加
+         */
+        await flushPendingCandidates();
 
-        for (
-            const candidate
-            of pendingCandidates
-        ) {
-
-            try {
-
-                await pc.addIceCandidate(
-                    candidate
-                );
-
-            }
-            catch (error) {
-
-                console.error(
-                    "ICE追加エラー:",
-                    error
-                );
-
-            }
-
-        }
-
-
-        pendingCandidates = [];
-
-
-        /* -------------------------------------
-           Answer作成
-           ------------------------------------- */
 
         log(
             "Answerを作成しています..."
         );
 
-
         const answer =
             await pc.createAnswer();
-
 
         await pc.setLocalDescription(
             answer
         );
-
 
         log(
             "✓ Answerを作成しました"
         );
 
 
-        /* -------------------------------------
-           Answer送信
-           ------------------------------------- */
+        sendSignal({
 
-        const sent =
-            sendSignal({
+            type: "answer",
 
-                type: "answer",
+            answer:
+                pc.localDescription
 
-                answer:
-                    pc.localDescription
+        });
 
-            });
+        log(
+            "✓ AnswerをiPhoneへ送信しました"
+        );
+
+    } catch (error) {
+
+        log(
+            "× Answer作成失敗: " +
+            error.message
+        );
+
+    }
+}
 
 
-        if (sent) {
+/* =========================================================
+   シグナリング処理
+========================================================= */
+
+async function handleSignal(
+    message
+) {
+
+
+    /* -----------------------------------------------------
+       Offer
+    ----------------------------------------------------- */
+
+    if (
+        message.type === "offer"
+    ) {
+
+        log(
+            "📩 Offerを受信しました"
+        );
+
+        /*
+         * Windows側だけ処理
+         */
+        if (
+            currentRole !== "windows"
+        ) {
 
             log(
-                "✓ AnswerをiPhoneへ送信しました"
+                "⚠ Windows側ではないためOfferを無視します"
             );
 
+            return;
         }
 
+        await createAnswer(
+            message.offer
+        );
+
+        return;
     }
 
 
-    /* =====================================================
-       Answerを受信
-       ===================================================== */
+    /* -----------------------------------------------------
+       Answer
+    ----------------------------------------------------- */
 
-    else if (
+    if (
         message.type === "answer"
     ) {
 
         log(
-            "📨 Answerを受信しました"
+            "📩 Answerを受信しました"
         );
 
-
-        if (!pc) {
-
-            log(
-                "⚠ PeerConnectionがありません"
-            );
-
-            return;
-
-        }
-
-
-        await pc.setRemoteDescription(
-
-            new RTCSessionDescription(
-                message.answer
-            )
-
-        );
-
-
-        remoteDescriptionSet =
-            true;
-
-
-        log(
-            "✓ Answerを設定しました"
-        );
-
-
-        /* -------------------------------------
-           保留していたICE候補を追加
-           ------------------------------------- */
-
-        for (
-            const candidate
-            of pendingCandidates
+        /*
+         * iPhone側だけ処理
+         */
+        if (
+            currentRole !== "iphone"
         ) {
 
-            try {
+            return;
+        }
 
-                await pc.addIceCandidate(
-                    candidate
-                );
+        try {
 
-            }
-            catch (error) {
+            await pc.setRemoteDescription(
+                new RTCSessionDescription(
+                    message.answer
+                )
+            );
 
-                console.error(
-                    "ICE追加エラー:",
-                    error
-                );
+            remoteDescriptionSet =
+                true;
 
-            }
+            log(
+                "✓ Answerを設定しました"
+            );
+
+
+            /*
+             * 待機していたICE候補を追加
+             */
+            await flushPendingCandidates();
+
+        } catch (error) {
+
+            log(
+                "× Answer設定失敗: " +
+                error.message
+            );
 
         }
 
-
-        pendingCandidates = [];
-
+        return;
     }
 
 
-    /* =====================================================
-       ICE候補を受信
-       ===================================================== */
+    /* -----------------------------------------------------
+       ICE Candidate
+    ----------------------------------------------------- */
 
-    else if (
-        message.type === "ice"
+    if (
+        message.type ===
+        "ice-candidate"
     ) {
 
-        if (!pc) {
-
-            log(
-                "⚠ PeerConnectionがありません"
-            );
+        if (
+            !message.candidate
+        ) {
 
             return;
-
         }
 
-
-        const candidate =
-            new RTCIceCandidate(
-                message.candidate
-            );
+        log(
+            "📡 ICE候補を受信しました"
+        );
 
 
         /*
-         * RemoteDescriptionが設定済みなら
-         * すぐ追加する
+         * RemoteDescriptionがまだなら
+         * 一旦保存
          */
-
         if (
-            remoteDescriptionSet
+            !remoteDescriptionSet
         ) {
 
-            try {
-
-                await pc.addIceCandidate(
-                    candidate
-                );
-
-            }
-            catch (error) {
-
-                console.error(
-                    "ICE追加エラー:",
-                    error
-                );
-
-            }
-
-        }
-        else {
-
-            /*
-             * まだOffer/Answerが来ていない場合は
-             * 一旦保存する
-             */
-
             pendingCandidates.push(
-                candidate
+                message.candidate
+            );
+
+            log(
+                "ICE候補を一時保存しました"
+            );
+
+            return;
+        }
+
+
+        try {
+
+            await pc.addIceCandidate(
+                message.candidate
+            );
+
+            log(
+                "✓ ICE候補を追加しました"
+            );
+
+        } catch (error) {
+
+            log(
+                "× ICE候補追加失敗: " +
+                error.message
             );
 
         }
 
+        return;
     }
 
 }
 
 
 /* =========================================================
-   テストメッセージ送信
-   ========================================================= */
+   待機中ICE候補を追加
+========================================================= */
 
-function sendTestMessage() {
+async function flushPendingCandidates() {
+
+    if (
+        !pc ||
+        !remoteDescriptionSet
+    ) {
+
+        return;
+    }
+
+    if (
+        pendingCandidates.length === 0
+    ) {
+
+        return;
+    }
+
+    log(
+        "保存していたICE候補を追加しています..."
+    );
+
+    for (
+        const candidate
+        of pendingCandidates
+    ) {
+
+        try {
+
+            await pc.addIceCandidate(
+                candidate
+            );
+
+        } catch (error) {
+
+            log(
+                "× 保存ICE候補追加失敗: " +
+                error.message
+            );
+
+        }
+
+    }
+
+    pendingCandidates = [];
+
+    log(
+        "✓ 保存ICE候補の追加完了"
+    );
+}
+
+
+/* =========================================================
+   DataChannel設定
+========================================================= */
+
+function setupDataChannel(
+    channel
+) {
+
+    dataChannel =
+        channel;
+
+    dataChannel.binaryType =
+        "arraybuffer";
+
+
+    /*
+     * 接続開始
+     */
+    dataChannel.onopen =
+        () => {
+
+            log(
+                "🟢 DataChannel接続成功"
+            );
+
+            setConnectionState(
+                "🟢 接続成功",
+                "connected"
+            );
+
+            sendButton.disabled =
+                false;
+
+            progressText.textContent =
+                "接続済み。画像を選択して送信できます。";
+        };
+
+
+    /*
+     * 切断
+     */
+    dataChannel.onclose =
+        () => {
+
+            log(
+                "DataChannel接続終了"
+            );
+
+            sendButton.disabled =
+                true;
+
+        };
+
+
+    /*
+     * エラー
+     */
+    dataChannel.onerror =
+        (error) => {
+
+            log(
+                "× DataChannelエラー"
+            );
+
+            console.error(
+                error
+            );
+
+        };
+
+
+    /*
+     * ファイル受信
+     */
+    dataChannel.onmessage =
+        handleDataMessage;
+}
+
+
+/* =========================================================
+   ファイル送信
+========================================================= */
+
+async function sendFile() {
 
     if (
         !dataChannel ||
@@ -1167,63 +1270,507 @@ function sendTestMessage() {
     ) {
 
         alert(
-            "まだiPhoneとWindowsが接続されていません"
+            "まだ接続されていません。"
         );
 
         return;
-
     }
 
 
-    let message;
+    const file =
+        fileInput.files[0];
 
 
-    if (
-        currentRole === "sender"
-    ) {
+    if (!file) {
 
-        message =
-            "HELLO_FROM_IPHONE";
+        alert(
+            "送信する画像を選択してください。"
+        );
 
+        return;
     }
-    else {
-
-        message =
-            "HELLO_FROM_WINDOWS";
-
-    }
-
-
-    dataChannel.send(
-        message
-    );
 
 
     log(
-        "📤 送信: "
-        + message
+        "📤 ファイル送信開始: " +
+        file.name
     );
 
+
+    /*
+     * ファイル情報送信
+     */
+    dataChannel.send(
+        JSON.stringify({
+
+            kind: "file-start",
+
+            name: file.name,
+
+            type:
+                file.type ||
+                "application/octet-stream",
+
+            size: file.size
+
+        })
+    );
+
+
+    const chunkSize =
+        16 * 1024;
+
+    let offset = 0;
+
+
+    /*
+     * 分割して送信
+     */
+    while (
+        offset < file.size
+    ) {
+
+
+        /*
+         * 送信バッファが大きくなったら
+         * 少し待つ
+         */
+        if (
+            dataChannel.bufferedAmount >
+            1024 * 1024
+        ) {
+
+            await waitForBuffer();
+
+        }
+
+
+        const chunk =
+            file.slice(
+                offset,
+                offset + chunkSize
+            );
+
+
+        const arrayBuffer =
+            await chunk.arrayBuffer();
+
+
+        dataChannel.send(
+            arrayBuffer
+        );
+
+
+        offset +=
+            arrayBuffer.byteLength;
+
+
+        const percent =
+            Math.round(
+                offset /
+                file.size *
+                100
+            );
+
+
+        progressBar.style.width =
+            percent + "%";
+
+        progressText.textContent =
+            `送信中... ${percent}%`;
+
+    }
+
+
+    /*
+     * 完了通知
+     */
+    dataChannel.send(
+        JSON.stringify({
+
+            kind: "file-end"
+
+        })
+    );
+
+
+    progressBar.style.width =
+        "100%";
+
+    progressText.textContent =
+        "送信完了！";
+
+
+    log(
+        "✓ ファイル送信完了"
+    );
 }
 
 
 /* =========================================================
-   ページ読み込み時
-   ========================================================= */
+   DataChannelバッファ待ち
+========================================================= */
 
-window.addEventListener(
-    "load",
-    () => {
+function waitForBuffer() {
 
-        log(
-            "RikuDropを起動しました"
+    return new Promise(
+        resolve => {
+
+            const check =
+                () => {
+
+                    if (
+                        dataChannel.bufferedAmount
+                        <
+                        256 * 1024
+                    ) {
+
+                        resolve();
+
+                    } else {
+
+                        setTimeout(
+                            check,
+                            50
+                        );
+
+                    }
+
+                };
+
+            check();
+
+        }
+    );
+}
+
+
+/* =========================================================
+   ファイル受信
+========================================================= */
+
+function handleDataMessage(
+    event
+) {
+
+    /*
+     * 文字列の場合
+     * ファイル情報
+     */
+    if (
+        typeof event.data === "string"
+    ) {
+
+        let message;
+
+        try {
+
+            message =
+                JSON.parse(
+                    event.data
+                );
+
+        } catch {
+
+            log(
+                "📩 メッセージ受信: " +
+                event.data
+            );
+
+            return;
+        }
+
+
+        /* ファイル開始 */
+        if (
+            message.kind ===
+            "file-start"
+        ) {
+
+            incomingFile = {
+
+                name:
+                    message.name,
+
+                type:
+                    message.type,
+
+                size:
+                    message.size,
+
+                received:
+                    0,
+
+                chunks: []
+
+            };
+
+
+            progressBar.style.width =
+                "0%";
+
+            progressText.textContent =
+                "受信中... 0%";
+
+
+            log(
+                "📥 ファイル受信開始: " +
+                message.name
+            );
+
+            return;
+        }
+
+
+        /* ファイル終了 */
+        if (
+            message.kind ===
+            "file-end"
+        ) {
+
+            finishFileReceive();
+
+            return;
+        }
+
+        return;
+    }
+
+
+    /*
+     * バイナリデータ
+     */
+    if (
+        incomingFile
+    ) {
+
+        incomingFile.chunks.push(
+            event.data
         );
 
-        log(
-            "同じルーム番号で接続してください"
+
+        incomingFile.received +=
+            event.data.byteLength;
+
+
+        const percent =
+            Math.round(
+                incomingFile.received /
+                incomingFile.size *
+                100
+            );
+
+
+        progressBar.style.width =
+            percent + "%";
+
+        progressText.textContent =
+            `受信中... ${percent}%`;
+    }
+}
+
+
+/* =========================================================
+   ファイル受信完了
+========================================================= */
+
+function finishFileReceive() {
+
+    if (
+        !incomingFile
+    ) {
+
+        return;
+    }
+
+
+    const blob =
+        new Blob(
+            incomingFile.chunks,
+            {
+                type:
+                    incomingFile.type
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    receivedArea.innerHTML = "";
+
+
+    const title =
+        document.createElement(
+            "p"
+        );
+
+    title.textContent =
+        "📥 " +
+        incomingFile.name;
+
+    title.style.fontWeight =
+        "bold";
+
+
+    receivedArea.appendChild(
+        title
+    );
+
+
+    /*
+     * 画像なら表示
+     */
+    if (
+        incomingFile.type.startsWith(
+            "image/"
+        )
+    ) {
+
+        const image =
+            document.createElement(
+                "img"
+            );
+
+        image.src =
+            url;
+
+        image.alt =
+            incomingFile.name;
+
+        receivedArea.appendChild(
+            image
         );
 
     }
+
+
+    /*
+     * ダウンロードリンク
+     */
+    const link =
+        document.createElement(
+            "a"
+        );
+
+    link.href =
+        url;
+
+    link.download =
+        incomingFile.name;
+
+    link.textContent =
+        "⬇️ このファイルを保存";
+
+    link.style.display =
+        "inline-block";
+
+    link.style.marginTop =
+        "12px";
+
+
+    receivedArea.appendChild(
+        link
+    );
+
+
+    progressBar.style.width =
+        "100%";
+
+    progressText.textContent =
+        "受信完了！";
+
+
+    log(
+        "✓ ファイル受信完了: " +
+        incomingFile.name
+    );
+
+
+    incomingFile =
+        null;
+}
+
+
+/* =========================================================
+   接続終了
+========================================================= */
+
+function cleanup() {
+
+    remoteDescriptionSet =
+        false;
+
+    pendingCandidates =
+        [];
+
+    incomingFile =
+        null;
+
+
+    if (dataChannel) {
+
+        try {
+
+            dataChannel.close();
+
+        } catch {}
+
+        dataChannel =
+            null;
+    }
+
+
+    if (pc) {
+
+        try {
+
+            pc.close();
+
+        } catch {}
+
+        pc =
+            null;
+    }
+
+
+    if (ws) {
+
+        try {
+
+            ws.close();
+
+        } catch {}
+
+        ws =
+            null;
+    }
+
+
+    sendButton.disabled =
+        true;
+
+    progressBar.style.width =
+        "0%";
+
+    progressText.textContent =
+        "接続すると送信できます。";
+}
+
+
+/* =========================================================
+   初期ログ
+========================================================= */
+
+log(
+    "RikuDropを起動しました"
+);
+
+log(
+    "同じルーム番号で2台を接続してください"
 );
 
 </script>
