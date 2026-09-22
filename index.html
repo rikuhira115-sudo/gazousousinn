@@ -2,85 +2,54 @@
 <html lang="ja">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RikuDrop</title>
+<title>RikuDrop 通信テスト</title>
 <style>
-  body { font-family: sans-serif; margin: 0; padding: 20px; background: #f7f7f7; }
-  h2 { text-align: center; margin-bottom: 20px; }
-  #sendArea, #receivedArea {
-    background: white; padding: 15px; border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 20px;
+  body { font-family: sans-serif; padding: 20px; background: #f7f7f7; }
+  h2 { text-align: center; }
+  #log {
+    background: white; padding: 15px; border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-top: 20px; font-size: 20px;
   }
-  #fileInput { width: 100%; margin-bottom: 10px; }
   button {
-    width: 100%; padding: 12px; border: none; border-radius: 10px;
-    background: #4CAF50; color: white; font-size: 16px;
-  }
-  .fileItem {
-    display: flex; justify-content: space-between; align-items: center;
-    background: #fafafa; padding: 10px; border-radius: 8px; margin-bottom: 8px;
-  }
-  .deleteBtn {
-    background: #e74c3c; color: white; border: none;
-    padding: 6px 10px; border-radius: 6px;
+    width: 100%; padding: 12px; margin-top: 10px;
+    background: #4CAF50; color: white; border: none;
+    border-radius: 10px; font-size: 18px;
   }
 </style>
 </head>
 
 <body>
 
-<h2>RikuDrop（Snapdrop自作版）</h2>
+<h2>RikuDrop 通信テスト</h2>
 
-<div id="sendArea">
-  <h3>送信するファイルを選択</h3>
-  <input type="file" id="fileInput" multiple>
-  <button onclick="sendFiles()">送信する</button>
-</div>
+<div id="log">まだ通信していません</div>
 
-<div id="receivedArea">
-  <h3>受信したファイル</h3>
-  <div id="receivedList"></div>
-</div>
+<button onclick="sendTestMessage()">テストメッセージ送信</button>
 
 <script>
   const WORKER_URL = "https://ancient-wind-96c6.rikuhira115.workers.dev";
 
   let pc = new RTCPeerConnection();
-  let channel = pc.createDataChannel("file");
+  let channel = pc.createDataChannel("test");
 
-  // 受信処理
-  channel.onmessage = (e) => {
-    const blob = new Blob([e.data]);
-    const url = URL.createObjectURL(blob);
-    const fileName = "received_" + Date.now();
-
-    const div = document.createElement("div");
-    div.className = "fileItem";
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = fileName;
-    link.textContent = fileName;
-
-    const del = document.createElement("button");
-    del.className = "deleteBtn";
-    del.textContent = "削除";
-    del.onclick = () => div.remove();
-
-    div.appendChild(link);
-    div.appendChild(del);
-    document.getElementById("receivedList").appendChild(div);
+  const log = (msg) => {
+    document.getElementById("log").innerText = msg;
   };
 
-  // 送信処理
-  async function sendFiles() {
-    const files = document.getElementById("fileInput").files;
-    if (!files.length) return;
+  // 受信したら画面に表示
+  channel.onmessage = (e) => {
+    log("受信: " + e.data);
+  };
 
-    for (const file of files) {
-      channel.send(await file.arrayBuffer());
-    }
+  // テストメッセージ送信
+  function sendTestMessage() {
+    const msg = window.innerWidth < 600
+      ? "HELLO_FROM_PHONE"
+      : "HELLO_FROM_PC";
 
-    alert("送信完了！");
+    channel.send(msg);
+    log("送信: " + msg);
   }
 
   // スマホ側：offer を送る
@@ -92,6 +61,8 @@
       method: "POST",
       body: JSON.stringify({ offer })
     });
+
+    log("スマホ側: offer を送信");
   }
 
   // PC側：offer を取得して answer を返す
@@ -102,7 +73,12 @@
     });
 
     const data = await res.json();
-    if (!data.offer) return;
+    if (!data.offer) {
+      log("PC側: offer がまだ来ていません");
+      return;
+    }
+
+    log("PC側: offer を受信");
 
     await pc.setRemoteDescription(data.offer);
 
@@ -116,15 +92,15 @@
 
     const finalData = await res2.json();
     await pc.setRemoteDescription(finalData.answer);
+
+    log("PC側: answer を返して接続完了");
   }
 
-  // 自動判定：スマホ側かPC側か
+  // 自動判定
   if (window.innerWidth < 600) {
-    // スマホ側
-    sendOffer();
+    sendOffer();  // スマホ
   } else {
-    // PC側
-    answerOffer();
+    answerOffer(); // PC
   }
 </script>
 
