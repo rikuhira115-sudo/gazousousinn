@@ -4,64 +4,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RikuDrop</title>
 <style>
-  body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 20px;
-    background: #f7f7f7;
+  body { font-family: sans-serif; margin: 0; padding: 20px; background: #f7f7f7; }
+  h2 { text-align: center; margin-bottom: 20px; }
+  #sendArea, #receivedArea {
+    background: white; padding: 15px; border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 20px;
   }
-
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  #sendArea {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-  }
-
-  #fileInput {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
+  #fileInput { width: 100%; margin-bottom: 10px; }
   button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background: #4CAF50;
-    color: white;
-    font-size: 16px;
+    width: 100%; padding: 12px; border: none; border-radius: 10px;
+    background: #4CAF50; color: white; font-size: 16px;
   }
-
-  #receivedArea {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-
   .fileItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #fafafa;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: #fafafa; padding: 10px; border-radius: 8px; margin-bottom: 8px;
   }
-
   .deleteBtn {
-    background: #e74c3c;
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 6px;
+    background: #e74c3c; color: white; border: none;
+    padding: 6px 10px; border-radius: 6px;
   }
 </style>
 </head>
@@ -82,7 +42,8 @@
 </div>
 
 <script>
-  // WebRTC 接続準備
+  const WORKER_URL = "https://ancient-wind-96c6.rikuhira115.workers.dev";
+
   let pc = new RTCPeerConnection();
   let channel = pc.createDataChannel("file");
 
@@ -90,7 +51,6 @@
   channel.onmessage = (e) => {
     const blob = new Blob([e.data]);
     const url = URL.createObjectURL(blob);
-
     const fileName = "received_" + Date.now();
 
     const div = document.createElement("div");
@@ -108,11 +68,10 @@
 
     div.appendChild(link);
     div.appendChild(del);
-
     document.getElementById("receivedList").appendChild(div);
   };
 
-  // 送信処理（複数ファイル対応）
+  // 送信処理
   async function sendFiles() {
     const files = document.getElementById("fileInput").files;
     if (!files.length) return;
@@ -124,23 +83,50 @@
     alert("送信完了！");
   }
 
-  // シグナリング（Workers と通信）
-  async function signaling() {
+  // スマホ側：offer を送る
+  async function sendOffer() {
     const offer = await pc.createOffer();
     await pc.setLocalDescription(offer);
 
-    const res = await fetch("https://ancient-wind-96c6.rikuhira115.workers.dev", {
+    await fetch(WORKER_URL, {
       method: "POST",
       body: JSON.stringify({ offer })
     });
-
-    const { answer } = await res.json();
-    await pc.setRemoteDescription(answer);
   }
 
-  signaling();
+  // PC側：offer を取得して answer を返す
+  async function answerOffer() {
+    const res = await fetch(WORKER_URL, {
+      method: "POST",
+      body: JSON.stringify({ answer: "request-offer" })
+    });
+
+    const data = await res.json();
+    if (!data.offer) return;
+
+    await pc.setRemoteDescription(data.offer);
+
+    const answer = await pc.createAnswer();
+    await pc.setLocalDescription(answer);
+
+    const res2 = await fetch(WORKER_URL, {
+      method: "POST",
+      body: JSON.stringify({ answer })
+    });
+
+    const finalData = await res2.json();
+    await pc.setRemoteDescription(finalData.answer);
+  }
+
+  // 自動判定：スマホ側かPC側か
+  if (window.innerWidth < 600) {
+    // スマホ側
+    sendOffer();
+  } else {
+    // PC側
+    answerOffer();
+  }
 </script>
 
 </body>
 </html>
-
