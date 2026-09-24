@@ -27,37 +27,53 @@ body {
   background:
     linear-gradient(
       135deg,
-      #eef4ff,
-      #f8f9ff
+      #eef5ff,
+      #f8fbff
     );
 
   color: #222;
 }
 
 .container {
-  width: min(900px, 94%);
-  margin: 30px auto;
+  width: min(
+    900px,
+    calc(100% - 30px)
+  );
+
+  margin: 0 auto;
+
+  padding: 40px 0 60px;
 }
 
-header {
+h1 {
   text-align: center;
-  margin-bottom: 25px;
-}
 
-.logo {
-  font-size: 38px;
-  font-weight: 800;
+  margin: 0;
+
+  font-size: 42px;
 }
 
 .subtitle {
+  text-align: center;
+
   color: #666;
-  margin-top: 5px;
+
+  margin-top: 8px;
+  margin-bottom: 35px;
 }
+
+
+/* =====================================
+   カード
+===================================== */
 
 .card {
   background: white;
-  border-radius: 22px;
+
+  border-radius: 20px;
+
   padding: 25px;
+
   margin-bottom: 20px;
 
   box-shadow:
@@ -65,148 +81,167 @@ header {
     rgba(0, 0, 0, 0.08);
 }
 
-.hidden {
-  display: none !important;
-}
 
+/* =====================================
+   ルーム入力
+===================================== */
 
-/* =========================
-   色選択
-========================= */
+.room-title {
+  font-size: 22px;
 
-.color-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, 1fr);
-
-  gap: 15px;
-
-  margin-top: 20px;
-}
-
-.color-button {
-  border: none;
-  border-radius: 18px;
-
-  min-height: 110px;
-
-  font-size: 28px;
   font-weight: bold;
 
-  color: white;
+  margin-bottom: 10px;
+}
+
+.room-description {
+  color: #666;
+
+  margin-bottom: 18px;
+}
+
+.room-input-area {
+  display: flex;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+#roomInput {
+  flex: 1;
+
+  min-width: 180px;
+
+  height: 55px;
+
+  border:
+    2px solid #ddd;
+
+  border-radius: 12px;
+
+  padding: 0 18px;
+
+  font-size: 24px;
+
+  text-align: center;
+
+  letter-spacing: 5px;
+
+  outline: none;
+}
+
+#roomInput:focus {
+  border-color: #4285f4;
+}
+
+button {
+  border: none;
+
+  border-radius: 12px;
+
+  padding:
+    13px 20px;
+
+  font-size: 16px;
+
+  font-weight: bold;
 
   cursor: pointer;
 
   transition:
-    transform .15s,
-    box-shadow .15s;
+    transform 0.1s,
+    opacity 0.1s;
 }
 
-.color-button:hover {
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 8px 20px
-    rgba(0, 0, 0, .15);
+button:active {
+  transform: scale(0.97);
 }
 
-.color-button:active {
-  transform: scale(.97);
+.primary-button {
+  background: #4285f4;
+
+  color: white;
 }
 
-.red {
-  background: #ef4444;
+.secondary-button {
+  background: #edf2f7;
+
+  color: #333;
 }
 
-.orange {
-  background: #f97316;
+.danger-button {
+  background: #ffe7e7;
+
+  color: #c62828;
 }
 
-.yellow {
-  background: #eab308;
-}
+button:disabled {
+  opacity: 0.5;
 
-.green {
-  background: #22c55e;
-}
-
-.blue {
-  background: #3b82f6;
-}
-
-.purple {
-  background: #8b5cf6;
+  cursor: not-allowed;
 }
 
 
-/* =========================
-   ステータス
-========================= */
+/* =====================================
+   接続状態
+===================================== */
 
 .status {
   text-align: center;
 
-  padding: 25px;
-
-  border-radius: 18px;
-
-  background: #f5f7fb;
-}
-
-.status-icon {
-  font-size: 45px;
-  margin-bottom: 10px;
-}
-
-.status-title {
-  font-size: 22px;
   font-weight: bold;
+
+  padding: 13px;
+
+  border-radius: 10px;
+
+  background: #f1f5f9;
+
+  margin-bottom: 20px;
 }
 
-.status-text {
-  margin-top: 8px;
-  color: #666;
+.status.connected {
+  background: #e7f8ed;
+
+  color: #16833b;
+}
+
+.status.waiting {
+  background: #fff7df;
+
+  color: #8a6500;
+}
+
+.status.error {
+  background: #ffe8e8;
+
+  color: #c62828;
 }
 
 
-/* =========================
+/* =====================================
    ファイル選択
-========================= */
+===================================== */
 
-.file-select {
-  width: 100%;
+.file-buttons {
+  display: flex;
 
-  padding: 18px;
+  gap: 10px;
 
-  border-radius: 14px;
+  flex-wrap: wrap;
 
-  border: 2px dashed #bbb;
-
-  background: #fafafa;
-
-  cursor: pointer;
-
-  text-align: center;
-
-  font-size: 17px;
+  margin-bottom: 20px;
 }
-
-.file-select:hover {
-  background: #f2f5ff;
-}
-
-.file-select input {
-  display: none;
-}
-
-
-/* =========================
-   ファイル一覧
-========================= */
 
 .file-list {
-  margin-top: 15px;
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-bottom: 20px;
 }
 
 .file-item {
@@ -216,17 +251,19 @@ header {
 
   gap: 12px;
 
-  padding: 12px;
+  padding: 12px 15px;
+
+  background: #f7f9fc;
 
   border-radius: 12px;
-
-  background: #f5f6fa;
-
-  margin-bottom: 8px;
 }
 
 .file-icon {
-  font-size: 28px;
+  font-size: 25px;
+
+  width: 35px;
+
+  text-align: center;
 }
 
 .file-info {
@@ -236,13 +273,9 @@ header {
 }
 
 .file-name {
-  font-weight: 600;
+  font-weight: bold;
 
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
+  word-break: break-all;
 }
 
 .file-size {
@@ -254,101 +287,64 @@ header {
 }
 
 .remove-file {
-  border: none;
+  background: #eee;
 
-  background: #e5e7eb;
+  color: #555;
 
-  border-radius: 50%;
+  padding:
+    7px 11px;
 
-  width: 34px;
-  height: 34px;
+  border-radius: 8px;
+}
 
-  cursor: pointer;
+
+/* =====================================
+   送信
+===================================== */
+
+.send-area {
+  margin-top: 15px;
+}
+
+#sendButton {
+  width: 100%;
 
   font-size: 18px;
-}
 
-.remove-file:hover {
-  background: #d1d5db;
-}
-
-
-/* =========================
-   ボタン
-========================= */
-
-.button-row {
-  display: flex;
-
-  gap: 10px;
-
-  margin-top: 15px;
-
-  flex-wrap: wrap;
-}
-
-button.action {
-  border: none;
-
-  border-radius: 12px;
-
-  padding: 13px 20px;
-
-  font-size: 16px;
-
-  cursor: pointer;
-
-  font-weight: 600;
-}
-
-.primary {
-  background: #2563eb;
-  color: white;
-}
-
-.primary:hover {
-  background: #1d4ed8;
-}
-
-.secondary {
-  background: #e5e7eb;
-  color: #222;
-}
-
-.secondary:hover {
-  background: #d1d5db;
-}
-
-.danger {
-  background: #fee2e2;
-  color: #b91c1c;
+  padding: 16px;
 }
 
 
-/* =========================
+/* =====================================
    プログレス
-========================= */
+===================================== */
 
-.progress-area {
+.progress-container {
+  display: none;
+
   margin-top: 20px;
 }
 
-.progress-label {
-  display: flex;
-
-  justify-content: space-between;
-
-  margin-bottom: 6px;
-
-  font-size: 14px;
+.progress-container.show {
+  display: block;
 }
 
-.progress {
+.progress-label {
+  margin-bottom: 7px;
+
+  font-size: 14px;
+
+  color: #555;
+}
+
+.progress-bar-background {
+  width: 100%;
+
   height: 12px;
 
   background: #e5e7eb;
 
-  border-radius: 999px;
+  border-radius: 20px;
 
   overflow: hidden;
 }
@@ -358,150 +354,155 @@ button.action {
 
   height: 100%;
 
-  background: #2563eb;
+  background: #4285f4;
 
-  transition: width .15s;
+  transition:
+    width 0.1s linear;
 }
 
 
-/* =========================
+/* =====================================
    受信ファイル
-========================= */
+===================================== */
+
+.received-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
 
 .received-item {
-  display: flex;
+  background: #f7f9fc;
 
-  align-items: center;
-
-  gap: 15px;
+  border-radius: 14px;
 
   padding: 15px;
-
-  background: #f5f6fa;
-
-  border-radius: 15px;
-
-  margin-bottom: 10px;
 }
 
-.received-preview {
-  width: 75px;
-  height: 75px;
-
-  object-fit: cover;
-
-  border-radius: 10px;
-
-  background: #ddd;
-}
-
-.received-icon {
-  width: 75px;
-  height: 75px;
-
+.received-top {
   display: flex;
 
   align-items: center;
-  justify-content: center;
 
-  font-size: 40px;
-
-  background: #e9edf5;
-
-  border-radius: 10px;
-}
-
-.received-info {
-  flex: 1;
-
-  min-width: 0;
+  gap: 12px;
 }
 
 .received-name {
+  flex: 1;
+
+  min-width: 0;
+
   font-weight: bold;
 
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-
-  white-space: nowrap;
-}
-
-.received-size {
-  color: #777;
-
-  font-size: 13px;
-
-  margin-top: 4px;
+  word-break: break-all;
 }
 
 .download-button {
-  border: none;
-
-  background: #2563eb;
+  background: #4285f4;
 
   color: white;
 
-  padding: 10px 14px;
+  padding:
+    9px 13px;
 
-  border-radius: 10px;
+  border-radius: 9px;
 
-  cursor: pointer;
-
-  white-space: nowrap;
-}
-
-
-/* =========================
-   接続情報
-========================= */
-
-.connection-info {
-  text-align: center;
-
-  color: #666;
+  text-decoration: none;
 
   font-size: 14px;
 
+  font-weight: bold;
+
+  display: inline-block;
+}
+
+.preview {
+  max-width: 100%;
+
+  max-height: 300px;
+
+  display: block;
+
   margin-top: 12px;
+
+  border-radius: 10px;
 }
 
 
-/* =========================
-   スマホ
-========================= */
+/* =====================================
+   接続情報
+===================================== */
+
+.room-display {
+  text-align: center;
+
+  font-size: 28px;
+
+  font-weight: bold;
+
+  letter-spacing: 5px;
+
+  margin:
+    10px 0 15px;
+}
+
+.disconnect-area {
+  text-align: center;
+
+  margin-top: 20px;
+}
+
+
+/* =====================================
+   非表示
+===================================== */
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =====================================
+   モバイル
+===================================== */
 
 @media (max-width: 600px) {
 
   .container {
-    margin: 15px auto;
+    width:
+      calc(100% - 20px);
+
+    padding-top: 25px;
   }
 
-  .logo {
-    font-size: 32px;
+  h1 {
+    font-size: 34px;
   }
 
   .card {
     padding: 18px;
+
+    border-radius: 16px;
   }
 
-  .color-grid {
-    grid-template-columns:
-      repeat(2, 1fr);
+  .room-input-area {
+    flex-direction: column;
   }
 
-  .color-button {
-    min-height: 95px;
-    font-size: 24px;
-  }
-
-  .received-item {
-    flex-wrap: wrap;
-  }
-
-  .download-button {
+  #roomInput {
     width: 100%;
   }
+
+  .room-input-area button {
+    width: 100%;
+  }
+
+  .file-buttons button {
+    flex: 1;
+  }
+
 }
 
 </style>
@@ -512,392 +513,335 @@ button.action {
 
 <div class="container">
 
-<header>
-
-  <div class="logo">
-    📦 RikuDrop
-  </div>
+  <h1>RikuDrop</h1>
 
   <div class="subtitle">
-    かんたんファイル送受信
-  </div>
-
-</header>
-
-
-<!-- =========================
-     色選択画面
-========================= -->
-
-<section
-  id="pairingCard"
-  class="card"
->
-
-  <div class="status">
-
-    <div class="status-icon">
-      🎨
-    </div>
-
-    <div class="status-title">
-      同じ色を2台で選んでください
-    </div>
-
-    <div class="status-text">
-      スマホとPCのどちらからでもOKです
-    </div>
-
+    端末間でファイルをかんたん送受信
   </div>
 
 
-  <div class="color-grid">
+  <!-- ==================================
+       ルーム接続
+  =================================== -->
 
-    <button
-      class="color-button red"
-      data-color="red"
-    >
-      🔴<br>
-      赤
-    </button>
+  <div
+    id="roomCard"
+    class="card"
+  >
 
-    <button
-      class="color-button orange"
-      data-color="orange"
-    >
-      🟠<br>
-      オレンジ
-    </button>
+    <div class="room-title">
+      ルームに接続
+    </div>
 
-    <button
-      class="color-button yellow"
-      data-color="yellow"
-    >
-      🟡<br>
-      黄色
-    </button>
+    <div class="room-description">
+      2台の端末で同じルーム番号を入力してください。
+      <br>
+      ルーム番号は1～3桁です。
+    </div>
 
-    <button
-      class="color-button green"
-      data-color="green"
-    >
-      🟢<br>
-      緑
-    </button>
+    <div class="room-input-area">
 
-    <button
-      class="color-button blue"
-      data-color="blue"
-    >
-      🔵<br>
-      青
-    </button>
+      <input
+        id="roomInput"
+        type="text"
+        inputmode="numeric"
+        maxlength="3"
+        pattern="[0-9]{1,3}"
+        placeholder="123"
+        autocomplete="off"
+      >
 
-    <button
-      class="color-button purple"
-      data-color="purple"
-    >
-      🟣<br>
-      紫
-    </button>
+      <button
+        id="randomRoomButton"
+        class="secondary-button"
+        type="button"
+      >
+        ランダム
+      </button>
+
+      <button
+        id="connectButton"
+        class="primary-button"
+        type="button"
+      >
+        接続する
+      </button>
+
+    </div>
 
   </div>
 
-</section>
 
+  <!-- ==================================
+       接続中
+  =================================== -->
 
-<!-- =========================
-     待機画面
-========================= -->
+  <div
+    id="connectionCard"
+    class="card hidden"
+  >
 
-<section
-  id="waitingCard"
-  class="card hidden"
->
-
-  <div class="status">
-
-    <div class="status-icon">
-      ⏳
+    <div
+      id="status"
+      class="status waiting"
+    >
+      接続準備中...
     </div>
 
     <div
-      id="waitingTitle"
-      class="status-title"
+      class="room-display"
+      id="roomDisplay"
     >
-      相手を探しています…
+      ---
     </div>
 
     <div
-      id="waitingText"
-      class="status-text"
+      style="
+        text-align:center;
+        color:#666;
+      "
     >
-      同じ色を選んだ端末を待っています
+      相手の端末にも
+      <strong>同じルーム番号</strong>
+      を入力してください。
     </div>
 
   </div>
+
+
+  <!-- ==================================
+       ファイル送信
+  =================================== -->
 
   <div
-    id="selectedColorText"
-    class="connection-info"
-  ></div>
+    id="fileCard"
+    class="card hidden"
+  >
 
-  <div class="button-row">
+    <div class="room-title">
+      📤 ファイルを送信
+    </div>
 
-    <button
-      id="cancelPairButton"
-      class="action secondary"
+    <div
+      class="file-buttons"
     >
-      キャンセル
-    </button>
 
-  </div>
+      <button
+        id="selectFilesButton"
+        class="primary-button"
+        type="button"
+      >
+        ファイルを追加
+      </button>
 
-</section>
+      <button
+        id="clearFilesButton"
+        class="danger-button"
+        type="button"
+      >
+        すべて解除
+      </button>
 
-
-<!-- =========================
-     接続後
-========================= -->
-
-<section
-  id="mainCard"
-  class="card hidden"
->
-
-  <div class="status">
-
-    <div class="status-icon">
-      🟢
     </div>
 
-    <div class="status-title">
-      接続しました！
-    </div>
-
-    <div class="status-text">
-      この画面からどちらの端末にも送信できます
-    </div>
-
-  </div>
-
-  <div
-    id="connectionInfo"
-    class="connection-info"
-  ></div>
-
-</section>
-
-
-<!-- =========================
-     ファイル送信
-========================= -->
-
-<section
-  id="sendCard"
-  class="card hidden"
->
-
-  <h2>
-    📤 ファイルを送る
-  </h2>
-
-  <label class="file-select">
 
     <input
       id="fileInput"
       type="file"
       multiple
+      style="display:none"
     >
 
-    📁 ファイルを選択
-
-  </label>
-
-
-  <div
-    id="fileList"
-    class="file-list"
-  ></div>
-
-
-  <div class="button-row">
-
-    <button
-      id="clearFilesButton"
-      class="action secondary"
-    >
-      選択をすべて解除
-    </button>
-
-    <button
-      id="sendButton"
-      class="action primary"
-    >
-      🚀 送信
-    </button>
-
-  </div>
-
-
-  <div
-    id="progressArea"
-    class="progress-area hidden"
-  >
-
-    <div class="progress-label">
-
-      <span id="progressName">
-        送信中…
-      </span>
-
-      <span id="progressPercent">
-        0%
-      </span>
-
-    </div>
-
-    <div class="progress">
-
-      <div
-        id="progressBar"
-        class="progress-bar"
-      ></div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     受信
-========================= -->
-
-<section
-  id="receiveCard"
-  class="card hidden"
->
-
-  <h2>
-    📥 受信したファイル
-  </h2>
-
-  <div id="receivedList">
 
     <div
-      id="noReceived"
-      class="connection-info"
+      id="fileList"
+      class="file-list"
     >
-      まだファイルを受信していません
+    </div>
+
+
+    <div class="send-area">
+
+      <button
+        id="sendButton"
+        class="primary-button"
+        type="button"
+        disabled
+      >
+        ファイルを送信
+      </button>
+
+    </div>
+
+
+    <div
+      id="progressContainer"
+      class="progress-container"
+    >
+
+      <div
+        id="progressLabel"
+        class="progress-label"
+      >
+        送信中...
+      </div>
+
+      <div
+        class="progress-bar-background"
+      >
+
+        <div
+          id="progressBar"
+          class="progress-bar"
+        >
+        </div>
+
+      </div>
+
     </div>
 
   </div>
 
-</section>
 
+  <!-- ==================================
+       受信ファイル
+  =================================== -->
+
+  <div
+    id="receivedCard"
+    class="card hidden"
+  >
+
+    <div class="room-title">
+      📥 受信したファイル
+    </div>
+
+    <div
+      id="receivedList"
+      class="received-list"
+    >
+    </div>
+
+  </div>
+
+
+  <!-- ==================================
+       切断
+  =================================== -->
+
+  <div
+    id="disconnectArea"
+    class="disconnect-area hidden"
+  >
+
+    <button
+      id="disconnectButton"
+      class="secondary-button"
+      type="button"
+    >
+      接続を終了
+    </button>
+
+  </div>
 
 </div>
 
 
 <script>
 
-"use strict";
-
-
-/* ========================================
+/* =========================================
    設定
-======================================== */
+========================================= */
 
 const WORKER_URL =
   "https://ancient-wind-96c6.rikuhira115.workers.dev";
 
 
+/*
+ * STUN
+ */
 const ICE_SERVERS = [
-
   {
     urls:
       "stun:stun.cloudflare.com:3478"
   }
-
 ];
 
 
+/*
+ * ファイル分割サイズ
+ *
+ * 16KB
+ */
 const CHUNK_SIZE =
   16 * 1024;
 
 
-/* ========================================
-   状態
-======================================== */
-
-let socket = null;
-
-let peerConnection = null;
-
-let dataChannel = null;
-
-let selectedColor = null;
-
-let selectedFiles = [];
-
-let peerRole = null;
-
-let connected = false;
-
-let pendingCandidates = [];
-
-let incomingFile = null;
-
-
-/* ========================================
+/* =========================================
    DOM
-======================================== */
+========================================= */
 
-const pairingCard =
+const roomCard =
   document.getElementById(
-    "pairingCard"
+    "roomCard"
   );
 
-const waitingCard =
+const connectionCard =
   document.getElementById(
-    "waitingCard"
+    "connectionCard"
   );
 
-const mainCard =
+const fileCard =
   document.getElementById(
-    "mainCard"
+    "fileCard"
   );
 
-const sendCard =
+const receivedCard =
   document.getElementById(
-    "sendCard"
+    "receivedCard"
   );
 
-const receiveCard =
+const disconnectArea =
   document.getElementById(
-    "receiveCard"
+    "disconnectArea"
   );
+
+
+const roomInput =
+  document.getElementById(
+    "roomInput"
+  );
+
+const randomRoomButton =
+  document.getElementById(
+    "randomRoomButton"
+  );
+
+const connectButton =
+  document.getElementById(
+    "connectButton"
+  );
+
+
+const status =
+  document.getElementById(
+    "status"
+  );
+
+const roomDisplay =
+  document.getElementById(
+    "roomDisplay"
+  );
+
 
 const fileInput =
   document.getElementById(
     "fileInput"
   );
 
-const fileList =
+const selectFilesButton =
   document.getElementById(
-    "fileList"
-  );
-
-const receivedList =
-  document.getElementById(
-    "receivedList"
-  );
-
-const sendButton =
-  document.getElementById(
-    "sendButton"
+    "selectFilesButton"
   );
 
 const clearFilesButton =
@@ -905,14 +849,25 @@ const clearFilesButton =
     "clearFilesButton"
   );
 
-const cancelPairButton =
+const fileList =
   document.getElementById(
-    "cancelPairButton"
+    "fileList"
   );
 
-const progressArea =
+const sendButton =
   document.getElementById(
-    "progressArea"
+    "sendButton"
+  );
+
+
+const progressContainer =
+  document.getElementById(
+    "progressContainer"
+  );
+
+const progressLabel =
+  document.getElementById(
+    "progressLabel"
   );
 
 const progressBar =
@@ -920,91 +875,246 @@ const progressBar =
     "progressBar"
   );
 
-const progressName =
-  document.getElementById(
-    "progressName"
-  );
 
-const progressPercent =
+const receivedList =
   document.getElementById(
-    "progressPercent"
+    "receivedList"
   );
 
 
-/* ========================================
-   色ボタン
-======================================== */
+const disconnectButton =
+  document.getElementById(
+    "disconnectButton"
+  );
 
-document
-  .querySelectorAll(".color-button")
-  .forEach(button => {
 
-    button.addEventListener(
-      "click",
-      () => {
+/* =========================================
+   状態
+========================================= */
 
-        const color =
-          button.dataset.color;
+let socket = null;
 
-        startPairing(color);
+let peerConnection = null;
 
-      }
+let dataChannel = null;
+
+let peerRole = null;
+
+let currentRoomId = null;
+
+
+/*
+ * 選択されたファイル
+ */
+let selectedFiles = [];
+
+
+/*
+ * ICE候補を一時保存
+ */
+let pendingCandidates = [];
+
+
+/*
+ * 受信中ファイル
+ */
+const receivingFiles = new Map();
+
+
+/* =========================================
+   ルーム番号入力
+========================================= */
+
+roomInput.addEventListener(
+  "input",
+  () => {
+
+    /*
+     * 数字以外を削除
+     */
+    roomInput.value =
+      roomInput.value
+        .replace(/\D/g, "")
+        .slice(0, 3);
+  }
+);
+
+
+/* =========================================
+   ランダムルーム
+========================================= */
+
+randomRoomButton.addEventListener(
+  "click",
+  () => {
+
+    const number =
+      Math.floor(
+        Math.random() * 900
+      ) + 100;
+
+    roomInput.value =
+      String(number);
+  }
+);
+
+
+/* =========================================
+   接続開始
+========================================= */
+
+connectButton.addEventListener(
+  "click",
+  () => {
+
+    connectToRoom();
+  }
+);
+
+
+/*
+ * Enterキーでも接続
+ */
+roomInput.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Enter"
+    ) {
+
+      connectToRoom();
+    }
+  }
+);
+
+
+/* =========================================
+   ルーム接続
+========================================= */
+
+function connectToRoom() {
+
+  let roomId =
+    roomInput.value.trim();
+
+
+  /*
+   * 入力チェック
+   */
+  if (
+    !/^\d{1,3}$/.test(roomId)
+  ) {
+
+    alert(
+      "ルーム番号は1～3桁の数字で入力してください。"
     );
 
-  });
+    return;
+  }
 
 
-/* ========================================
-   ペアリング開始
-======================================== */
+  currentRoomId =
+    roomId;
 
-function startPairing(color) {
 
-  selectedColor = color;
-
-  pairingCard.classList.add(
+  /*
+   * UI変更
+   */
+  roomCard.classList.add(
     "hidden"
   );
 
-  waitingCard.classList.remove(
+  connectionCard.classList.remove(
     "hidden"
   );
 
-  selectedColorText.textContent =
-    `選択中：${colorName(color)}`;
+  fileCard.classList.add(
+    "hidden"
+  );
 
-  console.log(
-    "ペアリング開始:",
-    color
+  receivedCard.classList.add(
+    "hidden"
+  );
+
+  disconnectArea.classList.remove(
+    "hidden"
   );
 
 
+  roomDisplay.textContent =
+    currentRoomId;
+
+
+  setStatus(
+    "ルームに接続中...",
+    "waiting"
+  );
+
+
+  /*
+   * WebSocket URL
+   */
   const wsUrl =
     WORKER_URL
       .replace(/^http/, "ws")
-      + `/pair?color=${encodeURIComponent(color)}`;
+      + `/room/${encodeURIComponent(
+        currentRoomId
+      )}`;
+
+
+  console.log(
+    "ルーム接続:",
+    currentRoomId
+  );
+
+
+  console.log(
+    "WebSocket:",
+    wsUrl
+  );
 
 
   socket =
     new WebSocket(wsUrl);
 
 
-  socket.onopen = () => {
+  /*
+   * 接続成功
+   */
+  socket.onopen =
+    () => {
 
-    console.log(
-      "✓ Cloudflare WebSocket接続成功"
-    );
+      console.log(
+        "✓ Cloudflare WebSocket接続成功"
+      );
 
-  };
+      setStatus(
+        "相手の端末を待っています...",
+        "waiting"
+      );
+    };
 
 
+  /*
+   * シグナリング受信
+   */
   socket.onmessage =
     async event => {
 
       try {
 
         const message =
-          JSON.parse(event.data);
+          JSON.parse(
+            event.data
+          );
+
+
+        console.log(
+          "シグナリング:",
+          message
+        );
+
 
         await handleSignalingMessage(
           message
@@ -1013,140 +1123,119 @@ function startPairing(color) {
       } catch (error) {
 
         console.error(
-          "WebSocketメッセージエラー:",
+          "シグナリング処理エラー:",
           error
         );
 
       }
-
     };
 
 
-  socket.onerror = error => {
+  /*
+   * WebSocketエラー
+   */
+  socket.onerror =
+    error => {
 
-    console.error(
-      "WebSocketエラー:",
-      error
-    );
+      console.error(
+        "WebSocketエラー:",
+        error
+      );
 
-    showPairingError(
-      "サーバーとの通信に失敗しました"
-    );
+      setStatus(
+        "接続エラーが発生しました",
+        "error"
+      );
+    };
 
-  };
 
+  /*
+   * WebSocket切断
+   */
+  socket.onclose =
+    () => {
 
-  socket.onclose = () => {
-
-    console.log(
-      "WebSocket切断"
-    );
-
-  };
-
+      console.log(
+        "WebSocket切断"
+      );
+    };
 }
 
 
-/* ========================================
-   色名
-======================================== */
-
-function colorName(color) {
-
-  const names = {
-
-    red: "🔴 赤",
-
-    orange: "🟠 オレンジ",
-
-    yellow: "🟡 黄色",
-
-    green: "🟢 緑",
-
-    blue: "🔵 青",
-
-    purple: "🟣 紫"
-
-  };
-
-  return names[color] || color;
-
-}
-
-
-/* ========================================
-   シグナリング
-======================================== */
+/* =========================================
+   シグナリング処理
+========================================= */
 
 async function handleSignalingMessage(
   message
 ) {
 
-  console.log(
-    "シグナリング:",
-    message
-  );
-
-
+  /*
+   * 待機
+   */
   if (
-    message.type === "waiting"
+    message.type ===
+    "waiting"
   ) {
 
-    document
-      .getElementById(
-        "waitingTitle"
-      )
-      .textContent =
-      "相手を探しています…";
-
-    document
-      .getElementById(
-        "waitingText"
-      )
-      .textContent =
-      "もう1台で同じ色を選んでください";
+    setStatus(
+      "相手の端末を待っています...",
+      "waiting"
+    );
 
     return;
   }
 
 
+  /*
+   * ペア成立
+   */
   if (
-    message.type === "paired"
+    message.type ===
+    "paired"
   ) {
 
     peerRole =
       message.role;
 
-    document
-      .getElementById(
-        "waitingTitle"
-      )
-      .textContent =
-      "2台を接続しています…";
 
-    document
-      .getElementById(
-        "waitingText"
-      )
-      .textContent =
-      "WebRTC接続を準備しています";
+    console.log(
+      "ペア成立:",
+      peerRole
+    );
+
+
+    setStatus(
+      "相手が見つかりました。接続中...",
+      "waiting"
+    );
+
 
     await createPeerConnection();
 
+
+    /*
+     * Offer側
+     */
     if (
-      peerRole === "offerer"
+      peerRole ===
+      "offerer"
     ) {
 
       await createOffer();
-
     }
+
 
     return;
   }
 
 
+  /*
+   * Offer
+   */
   if (
-    message.type === "offer"
+    message.type ===
+    "offer"
   ) {
 
     await handleOffer(
@@ -1157,8 +1246,12 @@ async function handleSignalingMessage(
   }
 
 
+  /*
+   * Answer
+   */
   if (
-    message.type === "answer"
+    message.type ===
+    "answer"
   ) {
 
     await handleAnswer(
@@ -1169,8 +1262,12 @@ async function handleSignalingMessage(
   }
 
 
+  /*
+   * ICE Candidate
+   */
   if (
-    message.type === "candidate"
+    message.type ===
+    "candidate"
   ) {
 
     await handleCandidate(
@@ -1181,28 +1278,49 @@ async function handleSignalingMessage(
   }
 
 
+  /*
+   * 相手が退出
+   */
   if (
-    message.type === "peer-left"
+    message.type ===
+    "peer-left"
   ) {
 
-    disconnectPeer(
-      "相手の端末が切断しました"
+    setStatus(
+      "相手が接続を終了しました",
+      "error"
     );
 
-  }
 
+    fileCard.classList.add(
+      "hidden"
+    );
+
+    return;
+  }
 }
 
 
-/* ========================================
-   WebRTC作成
-======================================== */
+/* =========================================
+   PeerConnection作成
+========================================= */
 
 async function createPeerConnection() {
 
-  if (peerConnection) {
+  /*
+   * すでに存在する場合
+   */
+  if (
+    peerConnection
+  ) {
+
     return;
   }
+
+
+  console.log(
+    "PeerConnection作成"
+  );
 
 
   peerConnection =
@@ -1212,6 +1330,9 @@ async function createPeerConnection() {
     });
 
 
+  /*
+   * ICE Candidate
+   */
   peerConnection.onicecandidate =
     event => {
 
@@ -1219,172 +1340,214 @@ async function createPeerConnection() {
         event.candidate
       ) {
 
-        sendSignal({
+        console.log(
+          "ICE候補:",
+          event.candidate
+        );
 
-          type: "candidate",
+
+        sendSignal({
+          type:
+            "candidate",
 
           candidate:
             event.candidate
-
         });
-
       }
-
     };
 
 
+  /*
+   * ICE状態
+   */
   peerConnection.oniceconnectionstatechange =
     () => {
 
       console.log(
-        "ICE状態:",
-        peerConnection.iceConnectionState
+        "🌐 ICE接続状態:",
+        peerConnection
+          .iceConnectionState
       );
 
+
+      if (
+        peerConnection
+          .iceConnectionState ===
+        "connected" ||
+        peerConnection
+          .iceConnectionState ===
+        "completed"
+      ) {
+
+        setStatus(
+          "接続しました",
+          "connected"
+        );
+
+        showConnectedUI();
+      }
+
+
+      if (
+        peerConnection
+          .iceConnectionState ===
+        "failed"
+      ) {
+
+        setStatus(
+          "WebRTC接続に失敗しました",
+          "error"
+        );
+
+        console.error(
+          "WebRTC接続失敗"
+        );
+      }
     };
 
 
+  /*
+   * WebRTC接続状態
+   */
   peerConnection.onconnectionstatechange =
     () => {
 
       console.log(
         "WebRTC状態:",
-        peerConnection.connectionState
+        peerConnection
+          .connectionState
       );
-
-
-      if (
-        peerConnection.connectionState ===
-        "connected"
-      ) {
-
-        connected = true;
-
-        showConnected();
-
-      }
-
-
-      if (
-        peerConnection.connectionState ===
-        "failed"
-      ) {
-
-        showPairingError(
-          "WebRTC接続に失敗しました。別のWi-Fiで試してください。"
-        );
-
-      }
-
     };
 
 
   /*
-   * Offerer側
-   */
-  if (
-    peerRole === "offerer"
-  ) {
-
-    dataChannel =
-      peerConnection.createDataChannel(
-        "RikuDropFiles",
-        {
-          ordered: true
-        }
-      );
-
-    setupDataChannel(
-      dataChannel
-    );
-
-  }
-
-
-  /*
-   * Answerer側
+   * Answer側がDataChannelを受け取る
    */
   peerConnection.ondatachannel =
     event => {
 
-      dataChannel =
-        event.channel;
-
-      setupDataChannel(
-        dataChannel
+      console.log(
+        "DataChannel受信"
       );
 
+      setupDataChannel(
+        event.channel
+      );
     };
 
+
+  /*
+   * Offer側
+   *
+   * DataChannelを作る
+   */
+  if (
+    peerRole ===
+    "offerer"
+  ) {
+
+    const channel =
+      peerConnection.createDataChannel(
+        "fileTransfer"
+      );
+
+    setupDataChannel(
+      channel
+    );
+  }
 }
 
 
-/* ========================================
-   DataChannel
-======================================== */
+/* =========================================
+   DataChannel設定
+========================================= */
 
 function setupDataChannel(
   channel
 ) {
 
-  channel.binaryType =
-    "arraybuffer";
+  dataChannel =
+    channel;
 
 
-  channel.bufferedAmountLowThreshold =
-    512 * 1024;
+  /*
+   * バッファ制御
+   */
+  dataChannel.bufferedAmountLowThreshold =
+    CHUNK_SIZE * 8;
 
 
-  channel.onopen = () => {
+  /*
+   * 接続
+   */
+  dataChannel.onopen =
+    () => {
 
-    console.log(
-      "✓ DataChannel接続成功"
-    );
-
-    showConnected();
-
-  };
-
-
-  channel.onclose = () => {
-
-    console.log(
-      "DataChannel切断"
-    );
-
-  };
-
-
-  channel.onerror = error => {
-
-    console.error(
-      "DataChannelエラー:",
-      error
-    );
-
-  };
-
-
-  channel.onmessage =
-    event => {
-
-      handleDataMessage(
-        event.data
+      console.log(
+        "✓ DataChannel接続成功"
       );
 
+      setStatus(
+        "接続済み",
+        "connected"
+      );
+
+      showConnectedUI();
     };
 
+
+  /*
+   * 切断
+   */
+  dataChannel.onclose =
+    () => {
+
+      console.log(
+        "DataChannel切断"
+      );
+    };
+
+
+  /*
+   * エラー
+   */
+  dataChannel.onerror =
+    error => {
+
+      console.error(
+        "DataChannelエラー:",
+        error
+      );
+    };
+
+
+  /*
+   * データ受信
+   */
+  dataChannel.onmessage =
+    async event => {
+
+      await handleDataMessage(
+        event.data
+      );
+    };
 }
 
 
-/* ========================================
+/* =========================================
    Offer作成
-======================================== */
+========================================= */
 
 async function createOffer() {
 
+  console.log(
+    "Offer作成"
+  );
+
+
   const offer =
     await peerConnection.createOffer();
+
 
   await peerConnection.setLocalDescription(
     offer
@@ -1392,24 +1555,32 @@ async function createOffer() {
 
 
   sendSignal({
-
-    type: "offer",
+    type:
+      "offer",
 
     offer:
       peerConnection.localDescription
-
   });
 
+
+  console.log(
+    "→ Offer送信"
+  );
 }
 
 
-/* ========================================
+/* =========================================
    Offer受信
-======================================== */
+========================================= */
 
 async function handleOffer(
   offer
 ) {
+
+  console.log(
+    "← Offer受信"
+  );
+
 
   await peerConnection.setRemoteDescription(
     new RTCSessionDescription(
@@ -1418,11 +1589,15 @@ async function handleOffer(
   );
 
 
-  await flushCandidates();
+  /*
+   * 待機していたICE候補を処理
+   */
+  await flushPendingCandidates();
 
 
   const answer =
     await peerConnection.createAnswer();
+
 
   await peerConnection.setLocalDescription(
     answer
@@ -1430,24 +1605,32 @@ async function handleOffer(
 
 
   sendSignal({
-
-    type: "answer",
+    type:
+      "answer",
 
     answer:
       peerConnection.localDescription
-
   });
 
+
+  console.log(
+    "→ Answer送信"
+  );
 }
 
 
-/* ========================================
+/* =========================================
    Answer受信
-======================================== */
+========================================= */
 
 async function handleAnswer(
   answer
 ) {
+
+  console.log(
+    "← Answer受信"
+  );
+
 
   await peerConnection.setRemoteDescription(
     new RTCSessionDescription(
@@ -1456,65 +1639,72 @@ async function handleAnswer(
   );
 
 
-  await flushCandidates();
-
+  await flushPendingCandidates();
 }
 
 
-/* ========================================
+/* =========================================
    ICE Candidate
-======================================== */
+========================================= */
 
 async function handleCandidate(
   candidate
 ) {
 
+  /*
+   * RemoteDescriptionがまだない場合
+   */
   if (
-    peerConnection &&
-    peerConnection.remoteDescription
+    !peerConnection ||
+    !peerConnection.remoteDescription
   ) {
-
-    try {
-
-      await peerConnection.addIceCandidate(
-        candidate
-      );
-
-    } catch (error) {
-
-      console.error(
-        "ICE候補エラー:",
-        error
-      );
-
-    }
-
-  } else {
 
     pendingCandidates.push(
       candidate
     );
 
+    return;
   }
 
+
+  try {
+
+    await peerConnection.addIceCandidate(
+      new RTCIceCandidate(
+        candidate
+      )
+    );
+
+  } catch (error) {
+
+    console.error(
+      "ICE候補追加エラー:",
+      error
+    );
+  }
 }
 
 
-/* ========================================
-   保留中ICE候補
-======================================== */
+/* =========================================
+   ICE候補キュー処理
+========================================= */
 
-async function flushCandidates() {
+async function flushPendingCandidates() {
 
-  for (
-    const candidate
-    of pendingCandidates
+  while (
+    pendingCandidates.length > 0
   ) {
+
+    const candidate =
+      pendingCandidates.shift();
+
 
     try {
 
       await peerConnection.addIceCandidate(
-        candidate
+        new RTCIceCandidate(
+          candidate
+        )
       );
 
     } catch (error) {
@@ -1523,90 +1713,127 @@ async function flushCandidates() {
         "ICE候補追加エラー:",
         error
       );
-
     }
-
   }
-
-  pendingCandidates = [];
-
 }
 
 
-/* ========================================
-   シグナル送信
-======================================== */
+/* =========================================
+   シグナリング送信
+========================================= */
 
 function sendSignal(
   message
 ) {
 
   if (
-    socket &&
-    socket.readyState ===
+    !socket ||
+    socket.readyState !==
     WebSocket.OPEN
   ) {
 
-    socket.send(
-      JSON.stringify(message)
+    console.error(
+      "WebSocketが接続されていません"
     );
 
-  }
-
-}
-
-
-/* ========================================
-   接続成功画面
-======================================== */
-
-function showConnected() {
-
-  if (
-    !dataChannel ||
-    dataChannel.readyState !== "open"
-  ) {
     return;
   }
 
 
-  connected = true;
-
-
-  pairingCard.classList.add(
-    "hidden"
+  socket.send(
+    JSON.stringify(message)
   );
-
-  waitingCard.classList.add(
-    "hidden"
-  );
-
-  mainCard.classList.remove(
-    "hidden"
-  );
-
-  sendCard.classList.remove(
-    "hidden"
-  );
-
-  receiveCard.classList.remove(
-    "hidden"
-  );
-
-
-  document
-    .getElementById(
-      "connectionInfo"
-    )
-    .textContent =
-    `接続方式：WebRTC / ${colorName(selectedColor)}`;
-
 }
 
 
-/* ========================================
+/* =========================================
+   接続済みUI
+========================================= */
+
+function showConnectedUI() {
+
+  fileCard.classList.remove(
+    "hidden"
+  );
+
+  receivedCard.classList.remove(
+    "hidden"
+  );
+
+  disconnectArea.classList.remove(
+    "hidden"
+  );
+
+  setStatus(
+    "接続済み",
+    "connected"
+  );
+}
+
+
+/* =========================================
+   ステータス
+========================================= */
+
+function setStatus(
+  text,
+  type
+) {
+
+  status.textContent =
+    text;
+
+
+  status.className =
+    "status";
+
+
+  if (
+    type ===
+    "connected"
+  ) {
+
+    status.classList.add(
+      "connected"
+    );
+  }
+
+
+  if (
+    type ===
+    "waiting"
+  ) {
+
+    status.classList.add(
+      "waiting"
+    );
+  }
+
+
+  if (
+    type ===
+    "error"
+  ) {
+
+    status.classList.add(
+      "error"
+    );
+  }
+}
+
+
+/* =========================================
    ファイル選択
-======================================== */
+========================================= */
+
+selectFilesButton.addEventListener(
+  "click",
+  () => {
+
+    fileInput.click();
+  }
+);
+
 
 fileInput.addEventListener(
   "change",
@@ -1617,23 +1844,39 @@ fileInput.addEventListener(
         fileInput.files
       );
 
+
+    /*
+     * 追加
+     */
     selectedFiles.push(
       ...files
     );
 
-    renderSelectedFiles();
 
+    /*
+     * 同じファイルを
+     * 何度も選択した場合でも
+     * リストには追加する
+     */
+    renderFileList();
+
+
+    /*
+     * inputをリセット
+     *
+     * 同じファイルを
+     * 再度選択できるようにする
+     */
     fileInput.value = "";
-
   }
 );
 
 
-/* ========================================
+/* =========================================
    ファイル一覧表示
-======================================== */
+========================================= */
 
-function renderSelectedFiles() {
+function renderFileList() {
 
   fileList.innerHTML = "";
 
@@ -1642,13 +1885,10 @@ function renderSelectedFiles() {
     selectedFiles.length === 0
   ) {
 
-    fileList.innerHTML =
-      `<div class="connection-info">
-        送信するファイルはありません
-      </div>`;
+    sendButton.disabled =
+      true;
 
     return;
-
   }
 
 
@@ -1706,7 +1946,7 @@ function renderSelectedFiles() {
         "file-size";
 
       size.textContent =
-        formatBytes(
+        formatFileSize(
           file.size
         );
 
@@ -1728,11 +1968,11 @@ function renderSelectedFiles() {
       remove.className =
         "remove-file";
 
+      remove.type =
+        "button";
+
       remove.textContent =
         "×";
-
-      remove.title =
-        "このファイルを削除";
 
 
       remove.addEventListener(
@@ -1744,8 +1984,7 @@ function renderSelectedFiles() {
             1
           );
 
-          renderSelectedFiles();
-
+          renderFileList();
         }
       );
 
@@ -1766,88 +2005,18 @@ function renderSelectedFiles() {
       fileList.appendChild(
         item
       );
-
     }
   );
 
+
+  sendButton.disabled =
+    false;
 }
 
 
-/* ========================================
-   ファイルアイコン
-======================================== */
-
-function getFileIcon(file) {
-
-  const type =
-    file.type || "";
-
-
-  if (
-    type.startsWith("image/")
-  ) {
-    return "🖼️";
-  }
-
-
-  if (
-    type.startsWith("video/")
-  ) {
-    return "🎥";
-  }
-
-
-  if (
-    type.startsWith("audio/")
-  ) {
-    return "🎵";
-  }
-
-
-  if (
-    type === "application/pdf"
-  ) {
-    return "📕";
-  }
-
-
-  if (
-    file.name
-      .toLowerCase()
-      .endsWith(".zip")
-  ) {
-    return "📦";
-  }
-
-
-  if (
-    type.includes("word") ||
-    file.name
-      .toLowerCase()
-      .match(/\.(doc|docx)$/)
-  ) {
-    return "📝";
-  }
-
-
-  if (
-    type.includes("sheet") ||
-    file.name
-      .toLowerCase()
-      .match(/\.(xls|xlsx)$/)
-  ) {
-    return "📊";
-  }
-
-
-  return "📄";
-
-}
-
-
-/* ========================================
-   ファイル全解除
-======================================== */
+/* =========================================
+   全ファイル解除
+========================================= */
 
 clearFilesButton.addEventListener(
   "click",
@@ -1855,101 +2024,228 @@ clearFilesButton.addEventListener(
 
     selectedFiles = [];
 
-    renderSelectedFiles();
-
+    renderFileList();
   }
 );
 
 
-/* ========================================
-   送信
-======================================== */
+/* =========================================
+   ファイルアイコン
+========================================= */
+
+function getFileIcon(
+  file
+) {
+
+  const type =
+    file.type || "";
+
+
+  if (
+    type.startsWith(
+      "image/"
+    )
+  ) {
+
+    return "🖼️";
+  }
+
+
+  if (
+    type.startsWith(
+      "video/"
+    )
+  ) {
+
+    return "🎥";
+  }
+
+
+  if (
+    type.startsWith(
+      "audio/"
+    )
+  ) {
+
+    return "🎵";
+  }
+
+
+  if (
+    type.includes(
+      "pdf"
+    )
+  ) {
+
+    return "📕";
+  }
+
+
+  if (
+    type.includes(
+      "word"
+    ) ||
+    file.name.endsWith(
+      ".doc"
+    ) ||
+    file.name.endsWith(
+      ".docx"
+    )
+  ) {
+
+    return "📘";
+  }
+
+
+  if (
+    type.includes(
+      "sheet"
+    ) ||
+    file.name.endsWith(
+      ".xls"
+    ) ||
+    file.name.endsWith(
+      ".xlsx"
+    )
+  ) {
+
+    return "📗";
+  }
+
+
+  if (
+    file.name.endsWith(
+      ".zip"
+    ) ||
+    file.name.endsWith(
+      ".rar"
+    ) ||
+    file.name.endsWith(
+      ".7z"
+    )
+  ) {
+
+    return "🗜️";
+  }
+
+
+  return "📄";
+}
+
+
+/* =========================================
+   ファイルサイズ表示
+========================================= */
+
+function formatFileSize(
+  bytes
+) {
+
+  if (
+    bytes < 1024
+  ) {
+
+    return `${bytes} B`;
+  }
+
+
+  if (
+    bytes < 1024 * 1024
+  ) {
+
+    return `${(
+      bytes / 1024
+    ).toFixed(1)} KB`;
+  }
+
+
+  if (
+    bytes <
+    1024 * 1024 * 1024
+  ) {
+
+    return `${(
+      bytes /
+      1024 /
+      1024
+    ).toFixed(1)} MB`;
+  }
+
+
+  return `${(
+    bytes /
+    1024 /
+    1024 /
+    1024
+  ).toFixed(2)} GB`;
+}
+
+
+/* =========================================
+   ファイル送信
+========================================= */
 
 sendButton.addEventListener(
   "click",
   async () => {
 
     if (
-      !connected ||
-      !dataChannel ||
-      dataChannel.readyState !== "open"
+      selectedFiles.length === 0
     ) {
 
-      alert(
-        "まだ接続されていません"
-      );
-
       return;
-
     }
 
 
     if (
-      selectedFiles.length === 0
+      !dataChannel ||
+      dataChannel.readyState !==
+      "open"
     ) {
 
       alert(
-        "送信するファイルを選択してください"
+        "まだ端末同士が接続されていません。"
       );
 
       return;
-
     }
 
 
-    sendButton.disabled = true;
+    sendButton.disabled =
+      true;
 
-    clearFilesButton.disabled = true;
+    selectFilesButton.disabled =
+      true;
 
-    progressArea.classList.remove(
-      "hidden"
-    );
+    clearFilesButton.disabled =
+      true;
 
 
     try {
 
-      /*
-       * コピーしておく
-       */
-      const files =
-        [...selectedFiles];
-
-
       for (
         let i = 0;
-        i < files.length;
+        i < selectedFiles.length;
         i++
       ) {
 
-        await sendFile(
-          files[i],
-          i + 1,
-          files.length
-        );
+        const file =
+          selectedFiles[i];
 
+
+        await sendFile(
+          file,
+          i + 1,
+          selectedFiles.length
+        );
       }
 
 
-      progressName.textContent =
+      progressLabel.textContent =
         "送信完了";
-
-      progressPercent.textContent =
-        "100%";
 
       progressBar.style.width =
         "100%";
-
-
-      setTimeout(
-        () => {
-
-          progressArea.classList.add(
-            "hidden"
-          );
-
-        },
-        1500
-      );
 
 
     } catch (error) {
@@ -1960,65 +2256,62 @@ sendButton.addEventListener(
       );
 
       alert(
-        "ファイルの送信に失敗しました"
+        "ファイルの送信中にエラーが発生しました。"
       );
 
     } finally {
 
-      sendButton.disabled = false;
+      sendButton.disabled =
+        false;
 
-      clearFilesButton.disabled = false;
+      selectFilesButton.disabled =
+        false;
 
+      clearFilesButton.disabled =
+        false;
     }
-
   }
 );
 
 
-/* ========================================
+/* =========================================
    1ファイル送信
-======================================== */
+========================================= */
 
 async function sendFile(
   file,
-  index,
-  total
+  fileNumber,
+  totalFiles
 ) {
 
   const fileId =
-    crypto.randomUUID();
+    `${Date.now()}-${Math.random()
+      .toString(36)
+      .slice(2)}`;
 
 
   /*
-   * ファイル情報を先に送る
+   * ファイル開始通知
    */
   dataChannel.send(
     JSON.stringify({
+      type:
+        "file-start",
 
-      type: "file-start",
+      id:
+        fileId,
 
-      id: fileId,
+      name:
+        file.name,
 
-      name: file.name,
-
-      size: file.size,
+      size:
+        file.size,
 
       mime:
         file.type ||
         "application/octet-stream"
-
     })
   );
-
-
-  progressName.textContent =
-    `${file.name} (${index}/${total})`;
-
-  progressPercent.textContent =
-    "0%";
-
-  progressBar.style.width =
-    "0%";
 
 
   let offset = 0;
@@ -2029,57 +2322,57 @@ async function sendFile(
   ) {
 
     /*
-     * DataChannelのバッファが
-     * 大きくなりすぎないように待つ
+     * DataChannelの
+     * バッファが大きくなりすぎないようにする
      */
     await waitForBuffer();
 
 
-    const end =
-      Math.min(
-        offset + CHUNK_SIZE,
-        file.size
-      );
-
-
-    const blob =
-      file.slice(
-        offset,
-        end
-      );
-
-
-    const buffer =
-      await blob.arrayBuffer();
+    const chunk =
+      await file
+        .slice(
+          offset,
+          offset +
+            CHUNK_SIZE
+        )
+        .arrayBuffer();
 
 
     dataChannel.send(
-      buffer
+      chunk
     );
 
 
-    offset = end;
+    offset +=
+      chunk.byteLength;
 
 
     const percent =
       file.size === 0
         ? 100
-        : Math.floor(
-            (offset /
-              file.size) *
-            100
-          );
+        :
+        Math.round(
+          offset /
+          file.size *
+          100
+        );
 
 
-    progressPercent.textContent =
-      `${percent}%`;
+    progressContainer.classList.add(
+      "show"
+    );
+
+
+    progressLabel.textContent =
+      `送信中 ${fileNumber}/${totalFiles}: ${file.name} (${percent}%)`;
+
 
     progressBar.style.width =
       `${percent}%`;
 
 
     /*
-     * UIを固めない
+     * UIを更新する時間を作る
      */
     await new Promise(
       resolve =>
@@ -2088,95 +2381,73 @@ async function sendFile(
           0
         )
     );
-
   }
 
 
   /*
-   * ファイル終了
+   * ファイル終了通知
    */
   dataChannel.send(
     JSON.stringify({
+      type:
+        "file-end",
 
-      type: "file-end",
-
-      id: fileId
-
+      id:
+        fileId
     })
   );
-
 }
 
 
-/* ========================================
-   DataChannelバッファ待ち
-======================================== */
+/* =========================================
+   DataChannelバッファ待機
+========================================= */
 
-function waitForBuffer() {
+async function waitForBuffer() {
 
-  return new Promise(
-    resolve => {
+  /*
+   * 16MBを超えたら待つ
+   */
+  while (
+    dataChannel.bufferedAmount >
+    16 * 1024 * 1024
+  ) {
 
-      if (
-        dataChannel.bufferedAmount
-        < 1024 * 1024
-      ) {
+    await new Promise(
+      resolve => {
 
-        resolve();
+        const check =
+          () => {
 
-        return;
+            if (
+              dataChannel.bufferedAmount <=
+              8 * 1024 * 1024
+            ) {
 
+              resolve();
+
+            } else {
+
+              setTimeout(
+                check,
+                20
+              );
+            }
+          };
+
+
+        check();
       }
-
-
-      const check =
-        () => {
-
-          if (
-            !dataChannel ||
-            dataChannel.readyState !==
-              "open"
-          ) {
-
-            resolve();
-
-            return;
-
-          }
-
-
-          if (
-            dataChannel.bufferedAmount
-            < 512 * 1024
-          ) {
-
-            resolve();
-
-          } else {
-
-            setTimeout(
-              check,
-              20
-            );
-
-          }
-
-        };
-
-
-      check();
-
-    }
-  );
-
+    );
+  }
 }
 
 
-/* ========================================
-   受信データ
-======================================== */
+/* =========================================
+   受信処理
+========================================= */
 
-function handleDataMessage(
+async function handleDataMessage(
   data
 ) {
 
@@ -2184,47 +2455,45 @@ function handleDataMessage(
    * JSONメッセージ
    */
   if (
-    typeof data === "string"
+    typeof data ===
+    "string"
   ) {
 
-    let message;
-
-    try {
-
-      message =
-        JSON.parse(data);
-
-    } catch (error) {
-
-      return;
-
-    }
+    const message =
+      JSON.parse(
+        data
+      );
 
 
+    /*
+     * ファイル開始
+     */
     if (
       message.type ===
       "file-start"
     ) {
 
-      incomingFile = {
+      receivingFiles.set(
+        message.id,
+        {
+          id:
+            message.id,
 
-        id:
-          message.id,
+          name:
+            message.name,
 
-        name:
-          message.name,
+          size:
+            message.size,
 
-        size:
-          message.size,
+          mime:
+            message.mime,
 
-        mime:
-          message.mime,
+          chunks: [],
 
-        chunks: [],
-
-        received: 0
-
-      };
+          received:
+            0
+        }
+      );
 
 
       console.log(
@@ -2233,159 +2502,177 @@ function handleDataMessage(
       );
 
 
-      return;
+      showReceivingProgress(
+        message.id,
+        message.name,
+        0
+      );
 
+
+      return;
     }
 
 
+    /*
+     * ファイル終了
+     */
     if (
       message.type ===
       "file-end"
     ) {
 
-      finishIncomingFile();
+      await finishReceivingFile(
+        message.id
+      );
+
 
       return;
-
     }
-
-    return;
-
   }
 
 
   /*
    * バイナリデータ
    */
+  let buffer;
+
+
   if (
     data instanceof ArrayBuffer
   ) {
 
-    receiveChunk(
-      data
-    );
+    buffer =
+      data;
 
-    return;
-
-  }
-
-
-  if (
+  } else if (
     data instanceof Blob
   ) {
 
-    data.arrayBuffer()
-      .then(
-        buffer =>
-          receiveChunk(
-            buffer
-          )
-      );
+    buffer =
+      await data.arrayBuffer();
 
-  }
+  } else {
 
-}
-
-
-/* ========================================
-   受信チャンク
-======================================== */
-
-function receiveChunk(
-  buffer
-) {
-
-  if (!incomingFile) {
     return;
   }
-
-
-  incomingFile.chunks.push(
-    buffer
-  );
-
-  incomingFile.received +=
-    buffer.byteLength;
 
 
   /*
-   * 受信進捗を表示
+   * 現在受信中のファイルを取得
+   *
+   * 同時に複数ファイルを
+   * 送らないため先頭のものを使用
    */
-  const percent =
-    incomingFile.size === 0
-      ? 100
-      : Math.floor(
-          (
-            incomingFile.received /
-            incomingFile.size
-          ) * 100
-        );
+  const iterator =
+    receivingFiles.values();
 
 
-  console.log(
-    `受信中 ${percent}%`
-  );
-
-}
+  const receivingFile =
+    iterator.next().value;
 
 
-/* ========================================
-   ファイル完成
-======================================== */
+  if (
+    !receivingFile
+  ) {
 
-function finishIncomingFile() {
-
-  if (!incomingFile) {
     return;
   }
 
 
-  const file =
-    new File(
-      incomingFile.chunks,
+  receivingFile.chunks.push(
+    buffer
+  );
 
-      incomingFile.name,
 
+  receivingFile.received +=
+    buffer.byteLength;
+
+
+  const percent =
+    receivingFile.size === 0
+      ? 100
+      :
+      Math.round(
+        receivingFile.received /
+        receivingFile.size *
+        100
+      );
+
+
+  showReceivingProgress(
+    receivingFile.id,
+    receivingFile.name,
+    percent
+  );
+}
+
+
+/* =========================================
+   受信ファイル完成
+========================================= */
+
+async function finishReceivingFile(
+  id
+) {
+
+  const info =
+    receivingFiles.get(
+      id
+    );
+
+
+  if (!info) {
+
+    return;
+  }
+
+
+  const blob =
+    new Blob(
+      info.chunks,
       {
         type:
-          incomingFile.mime
+          info.mime
       }
     );
 
 
+  /*
+   * 受信完了
+   */
+  receivingFiles.delete(
+    id
+  );
+
+
+  /*
+   * 受信表示
+   */
   addReceivedFile(
-    file
+    info.name,
+    blob
   );
 
 
   console.log(
     "受信完了:",
-    file.name
+    info.name
   );
-
-
-  incomingFile = null;
-
 }
 
 
-/* ========================================
+/* =========================================
    受信ファイル表示
-======================================== */
+========================================= */
 
 function addReceivedFile(
-  file
+  fileName,
+  blob
 ) {
 
-  const noReceived =
-    document.getElementById(
-      "noReceived"
-    );
-
-
-  if (noReceived) {
-    noReceived.remove();
-  }
+  receivedCard.classList.remove(
+    "hidden"
+  );
 
 
   const item =
@@ -2397,67 +2684,34 @@ function addReceivedFile(
     "received-item";
 
 
-  /*
-   * 画像ならプレビュー
-   */
-  if (
-    file.type.startsWith(
-      "image/"
-    )
-  ) {
-
-    const img =
-      document.createElement(
-        "img"
-      );
-
-    img.className =
-      "received-preview";
-
-    const url =
-      URL.createObjectURL(
-        file
-      );
-
-    img.src = url;
-
-    img.onload = () => {
-      URL.revokeObjectURL(url);
-    };
-
-
-    item.appendChild(
-      img
-    );
-
-  } else {
-
-    const icon =
-      document.createElement(
-        "div"
-      );
-
-    icon.className =
-      "received-icon";
-
-    icon.textContent =
-      getFileIcon(file);
-
-
-    item.appendChild(
-      icon
-    );
-
-  }
-
-
-  const info =
+  const top =
     document.createElement(
       "div"
     );
 
-  info.className =
-    "received-info";
+  top.className =
+    "received-top";
+
+
+  const icon =
+    document.createElement(
+      "div"
+    );
+
+  icon.className =
+    "file-icon";
+
+
+  icon.textContent =
+    getFileIcon(
+      {
+        type:
+          blob.type,
+
+        name:
+          fileName
+      }
+    );
 
 
   const name =
@@ -2469,314 +2723,252 @@ function addReceivedFile(
     "received-name";
 
   name.textContent =
-    file.name;
+    fileName;
 
 
-  const size =
-    document.createElement(
-      "div"
+  const url =
+    URL.createObjectURL(
+      blob
     );
-
-  size.className =
-    "received-size";
-
-  size.textContent =
-    formatBytes(
-      file.size
-    );
-
-
-  info.appendChild(
-    name
-  );
-
-  info.appendChild(
-    size
-  );
 
 
   const download =
     document.createElement(
-      "button"
+      "a"
     );
 
   download.className =
     "download-button";
 
+  download.href =
+    url;
+
+  download.download =
+    fileName;
+
   download.textContent =
-    "📥 ダウンロード";
+    "ダウンロード";
 
 
-  download.addEventListener(
-    "click",
-    () => {
-
-      downloadFile(
-        file
-      );
-
-    }
+  top.appendChild(
+    icon
   );
 
-
-  item.appendChild(
-    info
+  top.appendChild(
+    name
   );
 
-  item.appendChild(
+  top.appendChild(
     download
   );
+
+
+  item.appendChild(
+    top
+  );
+
+
+  /*
+   * 画像の場合はプレビュー
+   */
+  if (
+    blob.type.startsWith(
+      "image/"
+    )
+  ) {
+
+    const image =
+      document.createElement(
+        "img"
+      );
+
+    image.className =
+      "preview";
+
+    image.src =
+      url;
+
+    image.alt =
+      fileName;
+
+
+    item.appendChild(
+      image
+    );
+  }
 
 
   receivedList.prepend(
     item
   );
-
 }
 
 
-/* ========================================
-   ダウンロード
-======================================== */
+/* =========================================
+   受信進捗
+========================================= */
 
-function downloadFile(
-  file
+function showReceivingProgress(
+  id,
+  name,
+  percent
 ) {
 
-  const url =
-    URL.createObjectURL(
-      file
-    );
-
-
-  const a =
-    document.createElement(
-      "a"
-    );
-
-  a.href =
-    url;
-
-  a.download =
-    file.name;
-
-
-  document.body.appendChild(
-    a
+  progressContainer.classList.add(
+    "show"
   );
 
-  a.click();
 
-  a.remove();
+  progressLabel.textContent =
+    `受信中: ${name} (${percent}%)`;
 
 
-  setTimeout(
-    () => {
-
-      URL.revokeObjectURL(
-        url
-      );
-
-    },
-    1000
-  );
-
+  progressBar.style.width =
+    `${percent}%`;
 }
 
 
-/* ========================================
-   サイズ表示
-======================================== */
+/* =========================================
+   切断
+========================================= */
 
-function formatBytes(
-  bytes
-) {
-
-  if (
-    bytes === 0
-  ) {
-    return "0 B";
-  }
-
-
-  const units = [
-    "B",
-    "KB",
-    "MB",
-    "GB",
-    "TB"
-  ];
-
-
-  const index =
-    Math.floor(
-      Math.log(bytes) /
-      Math.log(1024)
-    );
-
-
-  return (
-    bytes /
-    Math.pow(
-      1024,
-      index
-    )
-  ).toFixed(
-    index === 0 ? 0 : 1
-  )
-  + " "
-  + units[index];
-
-}
-
-
-/* ========================================
-   ペアリングキャンセル
-======================================== */
-
-cancelPairButton.addEventListener(
+disconnectButton.addEventListener(
   "click",
   () => {
 
-    disconnectAll();
-
-    pairingCard.classList.remove(
-      "hidden"
-    );
-
-    waitingCard.classList.add(
-      "hidden"
-    );
-
+    disconnect();
   }
 );
 
 
-/* ========================================
-   エラー表示
-======================================== */
+function disconnect() {
 
-function showPairingError(
-  message
-) {
-
-  document
-    .getElementById(
-      "waitingTitle"
-    )
-    .textContent =
-    "⚠️ 接続できませんでした";
-
-  document
-    .getElementById(
-      "waitingText"
-    )
-    .textContent =
-    message;
-
-}
+  console.log(
+    "接続終了"
+  );
 
 
-/* ========================================
-   切断
-======================================== */
-
-function disconnectPeer(
-  message
-) {
-
-  connected = false;
-
-  if (peerConnection) {
+  /*
+   * DataChannel
+   */
+  if (
+    dataChannel
+  ) {
 
     try {
-      peerConnection.close();
+
+      dataChannel.close();
+
     } catch (error) {}
 
+    dataChannel =
+      null;
   }
 
-  peerConnection = null;
 
-  dataChannel = null;
+  /*
+   * PeerConnection
+   */
+  if (
+    peerConnection
+  ) {
 
-  pendingCandidates = [];
+    try {
 
-
-  mainCard.classList.add(
-    "hidden"
-  );
-
-  sendCard.classList.add(
-    "hidden"
-  );
-
-  receiveCard.classList.add(
-    "hidden"
-  );
-
-
-  waitingCard.classList.remove(
-    "hidden"
-  );
-
-
-  document
-    .getElementById(
-      "waitingTitle"
-    )
-    .textContent =
-    message;
-
-}
-
-
-function disconnectAll() {
-
-  try {
-
-    if (socket) {
-      socket.close();
-    }
-
-  } catch (error) {}
-
-
-  try {
-
-    if (dataChannel) {
-      dataChannel.close();
-    }
-
-  } catch (error) {}
-
-
-  try {
-
-    if (peerConnection) {
       peerConnection.close();
-    }
 
-  } catch (error) {}
+    } catch (error) {}
+
+    peerConnection =
+      null;
+  }
 
 
-  socket = null;
+  /*
+   * WebSocket
+   */
+  if (
+    socket
+  ) {
 
-  dataChannel = null;
+    try {
 
-  peerConnection = null;
+      socket.close();
 
-  connected = false;
+    } catch (error) {}
 
-  pendingCandidates = [];
+    socket =
+      null;
+  }
 
+
+  /*
+   * 状態リセット
+   */
+  peerRole =
+    null;
+
+  currentRoomId =
+    null;
+
+  pendingCandidates =
+    [];
+
+
+  receivingFiles.clear();
+
+
+  /*
+   * UI
+   */
+  roomCard.classList.remove(
+    "hidden"
+  );
+
+  connectionCard.classList.add(
+    "hidden"
+  );
+
+  fileCard.classList.add(
+    "hidden"
+  );
+
+  receivedCard.classList.add(
+    "hidden"
+  );
+
+  disconnectArea.classList.add(
+    "hidden"
+  );
+
+
+  roomInput.value =
+    "";
+
+  selectedFiles =
+    [];
+
+  renderFileList();
+
+
+  progressContainer.classList.remove(
+    "show"
+  );
+
+  progressBar.style.width =
+    "0%";
 }
 
 
-/* ========================================
-   初期表示
-======================================== */
+/* =========================================
+   初期状態
+========================================= */
 
-renderSelectedFiles();
+renderFileList();
+
+console.log(
+  "RikuDrop 起動"
+);
 
 </script>
 
