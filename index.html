@@ -2,360 +2,506 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>RikuDrop</title>
 
 <style>
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 
-    background: #f5f7fb;
-    color: #222;
+  background:
+    linear-gradient(
+      135deg,
+      #eef4ff,
+      #f8f9ff
+    );
+
+  color: #222;
 }
 
 .container {
-    width: min(750px, 92%);
-    margin: 30px auto;
+  width: min(900px, 94%);
+  margin: 30px auto;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 5px;
+header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.logo {
+  font-size: 38px;
+  font-weight: 800;
 }
 
 .subtitle {
-    text-align: center;
-    color: #777;
-    margin-bottom: 25px;
+  color: #666;
+  margin-top: 5px;
 }
-
-
-/* ================================
-   カード
-================================ */
 
 .card {
-    background: white;
-    border-radius: 18px;
-    padding: 20px;
-    margin-bottom: 18px;
+  background: white;
+  border-radius: 22px;
+  padding: 25px;
+  margin-bottom: 20px;
 
-    box-shadow:
-        0 4px 15px rgba(0,0,0,0.08);
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.08);
+}
+
+.hidden {
+  display: none !important;
 }
 
 
-/* ================================
-   ラベル
-================================ */
+/* =========================
+   色選択
+========================= */
 
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
+.color-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 15px;
+
+  margin-top: 20px;
+}
+
+.color-button {
+  border: none;
+  border-radius: 18px;
+
+  min-height: 110px;
+
+  font-size: 28px;
+  font-weight: bold;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition:
+    transform .15s,
+    box-shadow .15s;
+}
+
+.color-button:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 20px
+    rgba(0, 0, 0, .15);
+}
+
+.color-button:active {
+  transform: scale(.97);
+}
+
+.red {
+  background: #ef4444;
+}
+
+.orange {
+  background: #f97316;
+}
+
+.yellow {
+  background: #eab308;
+}
+
+.green {
+  background: #22c55e;
+}
+
+.blue {
+  background: #3b82f6;
+}
+
+.purple {
+  background: #8b5cf6;
 }
 
 
-/* ================================
-   入力
-================================ */
-
-input[type="text"] {
-    width: 100%;
-    padding: 12px;
-
-    border: 1px solid #ddd;
-    border-radius: 10px;
-
-    font-size: 16px;
-}
-
-
-/* ================================
-   ボタン
-================================ */
-
-button {
-    width: 100%;
-
-    padding: 13px;
-
-    border: none;
-    border-radius: 10px;
-
-    background: #333;
-    color: white;
-
-    font-size: 16px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    margin-top: 10px;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-button:disabled {
-    background: #aaa;
-    cursor: not-allowed;
-}
-
-
-/* ================================
-   役割ボタン
-================================ */
-
-.roles {
-    display: flex;
-    gap: 10px;
-}
-
-.roles button {
-    flex: 1;
-}
-
-
-/* ================================
+/* =========================
    ステータス
-================================ */
+========================= */
 
 .status {
-    padding: 14px;
+  text-align: center;
 
-    background: #f0f3f8;
+  padding: 25px;
 
-    border-radius: 10px;
+  border-radius: 18px;
 
-    text-align: center;
+  background: #f5f7fb;
+}
 
-    font-weight: bold;
+.status-icon {
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
+.status-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.status-text {
+  margin-top: 8px;
+  color: #666;
 }
 
 
-/* ================================
+/* =========================
    ファイル選択
-================================ */
+========================= */
 
-.file-select-area {
-    border: 2px dashed #ccc;
+.file-select {
+  width: 100%;
 
-    border-radius: 12px;
+  padding: 18px;
 
-    padding: 20px;
+  border-radius: 14px;
 
-    text-align: center;
+  border: 2px dashed #bbb;
 
-    cursor: pointer;
+  background: #fafafa;
+
+  cursor: pointer;
+
+  text-align: center;
+
+  font-size: 17px;
 }
 
-.file-select-area:hover {
-    background: #f8f8f8;
+.file-select:hover {
+  background: #f2f5ff;
 }
 
-#file {
-    width: 100%;
+.file-select input {
+  display: none;
 }
 
 
-/* ================================
-   選択画像一覧
-================================ */
+/* =========================
+   ファイル一覧
+========================= */
 
-.selected-files {
-    margin-top: 15px;
+.file-list {
+  margin-top: 15px;
 }
 
-.selected-file {
-    display: flex;
+.file-item {
+  display: flex;
 
-    align-items: center;
+  align-items: center;
 
-    gap: 10px;
+  gap: 12px;
 
-    padding: 10px;
+  padding: 12px;
 
-    margin-bottom: 8px;
+  border-radius: 12px;
 
-    background: #f5f7fb;
+  background: #f5f6fa;
 
-    border-radius: 10px;
+  margin-bottom: 8px;
 }
 
-.selected-file-name {
-    flex: 1;
+.file-icon {
+  font-size: 28px;
+}
 
-    overflow: hidden;
+.file-info {
+  flex: 1;
 
-    text-overflow: ellipsis;
+  min-width: 0;
+}
 
-    white-space: nowrap;
+.file-name {
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.file-size {
+  color: #777;
+
+  font-size: 13px;
+
+  margin-top: 3px;
 }
 
 .remove-file {
-    width: 35px;
+  border: none;
 
-    padding: 7px;
+  background: #e5e7eb;
 
-    margin: 0;
+  border-radius: 50%;
 
-    background: #d9534f;
+  width: 34px;
+  height: 34px;
 
-    font-size: 14px;
+  cursor: pointer;
+
+  font-size: 18px;
 }
 
-.clear-button {
-    background: #777;
-
-    font-size: 14px;
-}
-
-
-/* ================================
-   受信画像
-================================ */
-
-.received-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(180px, 1fr));
-
-    gap: 15px;
-
-    margin-top: 15px;
-}
-
-.received-item {
-    background: #f5f7fb;
-
-    border-radius: 12px;
-
-    padding: 12px;
-
-    text-align: center;
-}
-
-.received-item img {
-    width: 100%;
-
-    max-height: 250px;
-
-    object-fit: contain;
-
-    border-radius: 8px;
-
-    background: white;
-}
-
-.received-name {
-    margin-top: 8px;
-
-    font-size: 13px;
-
-    word-break: break-all;
-}
-
-.download-button {
-    background: #16833b;
-
-    font-size: 14px;
-
-    margin-top: 8px;
+.remove-file:hover {
+  background: #d1d5db;
 }
 
 
-/* ================================
-   ログ
-================================ */
+/* =========================
+   ボタン
+========================= */
 
-.log {
-    height: 300px;
+.button-row {
+  display: flex;
 
-    overflow-y: auto;
+  gap: 10px;
 
-    background: #111;
+  margin-top: 15px;
 
-    color: #eee;
+  flex-wrap: wrap;
+}
 
-    padding: 12px;
+button.action {
+  border: none;
 
-    border-radius: 10px;
+  border-radius: 12px;
 
-    font-family: monospace;
+  padding: 13px 20px;
 
-    font-size: 13px;
+  font-size: 16px;
 
-    white-space: pre-wrap;
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.primary:hover {
+  background: #1d4ed8;
+}
+
+.secondary {
+  background: #e5e7eb;
+  color: #222;
+}
+
+.secondary:hover {
+  background: #d1d5db;
+}
+
+.danger {
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
 
-/* ================================
-   説明
-================================ */
-
-.info {
-    font-size: 14px;
-
-    color: #666;
-
-    line-height: 1.6;
-
-    margin-top: 8px;
-}
-
-
-/* ================================
-   進捗
-================================ */
+/* =========================
+   プログレス
+========================= */
 
 .progress-area {
-    margin-top: 15px;
-
-    display: none;
+  margin-top: 20px;
 }
 
-.progress-bar-background {
-    width: 100%;
+.progress-label {
+  display: flex;
 
-    height: 12px;
+  justify-content: space-between;
 
-    background: #ddd;
+  margin-bottom: 6px;
 
-    border-radius: 10px;
+  font-size: 14px;
+}
 
-    overflow: hidden;
+.progress {
+  height: 12px;
+
+  background: #e5e7eb;
+
+  border-radius: 999px;
+
+  overflow: hidden;
 }
 
 .progress-bar {
-    width: 0%;
+  width: 0%;
 
-    height: 100%;
+  height: 100%;
 
-    background: #333;
+  background: #2563eb;
 
-    transition: width 0.1s;
+  transition: width .15s;
 }
 
-.progress-text {
-    text-align: center;
 
-    margin-top: 7px;
+/* =========================
+   受信ファイル
+========================= */
 
-    font-size: 14px;
+.received-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 15px;
+
+  background: #f5f6fa;
+
+  border-radius: 15px;
+
+  margin-bottom: 10px;
+}
+
+.received-preview {
+  width: 75px;
+  height: 75px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  background: #ddd;
+}
+
+.received-icon {
+  width: 75px;
+  height: 75px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 40px;
+
+  background: #e9edf5;
+
+  border-radius: 10px;
+}
+
+.received-info {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.received-name {
+  font-weight: bold;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.received-size {
+  color: #777;
+
+  font-size: 13px;
+
+  margin-top: 4px;
+}
+
+.download-button {
+  border: none;
+
+  background: #2563eb;
+
+  color: white;
+
+  padding: 10px 14px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   接続情報
+========================= */
+
+.connection-info {
+  text-align: center;
+
+  color: #666;
+
+  font-size: 14px;
+
+  margin-top: 12px;
+}
+
+
+/* =========================
+   スマホ
+========================= */
+
+@media (max-width: 600px) {
+
+  .container {
+    margin: 15px auto;
+  }
+
+  .logo {
+    font-size: 32px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .color-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .color-button {
+    min-height: 95px;
+    font-size: 24px;
+  }
+
+  .received-item {
+    flex-wrap: wrap;
+  }
+
+  .download-button {
+    width: 100%;
+  }
 }
 
 </style>
@@ -366,2154 +512,2271 @@ button:disabled {
 
 <div class="container">
 
-<h1>📱 RikuDrop</h1>
+<header>
 
-<div class="subtitle">
-iPhone ↔ Windows 画像転送
-</div>
+  <div class="logo">
+    📦 RikuDrop
+  </div>
+
+  <div class="subtitle">
+    かんたんファイル送受信
+  </div>
+
+</header>
 
 
-<!-- ======================================
-     部屋
-======================================= -->
+<!-- =========================
+     色選択画面
+========================= -->
 
-<div class="card">
-
-<label>① 同じ部屋番号を入力</label>
-
-<input
-    id="room"
-    type="text"
-    placeholder="例：1234"
+<section
+  id="pairingCard"
+  class="card"
 >
 
-<div class="info">
-iPhoneとWindowsで同じ番号を入力してください。
-</div>
+  <div class="status">
 
-</div>
+    <div class="status-icon">
+      🎨
+    </div>
 
+    <div class="status-title">
+      同じ色を2台で選んでください
+    </div>
 
-<!-- ======================================
-     役割
-======================================= -->
+    <div class="status-text">
+      スマホとPCのどちらからでもOKです
+    </div>
 
-<div class="card">
-
-<label>② 自分の端末を選択</label>
-
-<div class="roles">
-
-<button onclick="start('windows')">
-💻 Windows
-</button>
-
-<button onclick="start('iphone')">
-📱 iPhone
-</button>
-
-</div>
-
-</div>
+  </div>
 
 
-<!-- ======================================
-     接続状態
-======================================= -->
+  <div class="color-grid">
 
-<div class="card">
+    <button
+      class="color-button red"
+      data-color="red"
+    >
+      🔴<br>
+      赤
+    </button>
 
-<label>接続状態</label>
+    <button
+      class="color-button orange"
+      data-color="orange"
+    >
+      🟠<br>
+      オレンジ
+    </button>
 
-<div
-    id="status"
-    class="status"
+    <button
+      class="color-button yellow"
+      data-color="yellow"
+    >
+      🟡<br>
+      黄色
+    </button>
+
+    <button
+      class="color-button green"
+      data-color="green"
+    >
+      🟢<br>
+      緑
+    </button>
+
+    <button
+      class="color-button blue"
+      data-color="blue"
+    >
+      🔵<br>
+      青
+    </button>
+
+    <button
+      class="color-button purple"
+      data-color="purple"
+    >
+      🟣<br>
+      紫
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     待機画面
+========================= -->
+
+<section
+  id="waitingCard"
+  class="card hidden"
 >
-未接続
-</div>
 
-</div>
+  <div class="status">
+
+    <div class="status-icon">
+      ⏳
+    </div>
+
+    <div
+      id="waitingTitle"
+      class="status-title"
+    >
+      相手を探しています…
+    </div>
+
+    <div
+      id="waitingText"
+      class="status-text"
+    >
+      同じ色を選んだ端末を待っています
+    </div>
+
+  </div>
+
+  <div
+    id="selectedColorText"
+    class="connection-info"
+  ></div>
+
+  <div class="button-row">
+
+    <button
+      id="cancelPairButton"
+      class="action secondary"
+    >
+      キャンセル
+    </button>
+
+  </div>
+
+</section>
 
 
-<!-- ======================================
-     画像選択
-======================================= -->
+<!-- =========================
+     接続後
+========================= -->
 
-<div class="card">
-
-<label>③ 送信する画像を選択</label>
-
-<div class="file-select-area">
-
-<input
-    id="file"
-    type="file"
-    accept="image/*"
-    multiple
+<section
+  id="mainCard"
+  class="card hidden"
 >
 
-<div class="info">
-複数の画像を同時に選択できます
-</div>
+  <div class="status">
 
-</div>
+    <div class="status-icon">
+      🟢
+    </div>
+
+    <div class="status-title">
+      接続しました！
+    </div>
+
+    <div class="status-text">
+      この画面からどちらの端末にも送信できます
+    </div>
+
+  </div>
+
+  <div
+    id="connectionInfo"
+    class="connection-info"
+  ></div>
+
+</section>
 
 
-<!-- 選択画像一覧 -->
+<!-- =========================
+     ファイル送信
+========================= -->
 
-<div
-    id="selectedFiles"
-    class="selected-files"
-></div>
-
-
-<button
-    class="clear-button"
-    onclick="clearSelectedFiles()"
+<section
+  id="sendCard"
+  class="card hidden"
 >
-🗑️ 選択をすべて解除
-</button>
+
+  <h2>
+    📤 ファイルを送る
+  </h2>
+
+  <label class="file-select">
+
+    <input
+      id="fileInput"
+      type="file"
+      multiple
+    >
+
+    📁 ファイルを選択
+
+  </label>
 
 
-<button
-    id="sendButton"
-    onclick="sendFiles()"
-    disabled
->
-📤 選択した画像を送信
-</button>
+  <div
+    id="fileList"
+    class="file-list"
+  ></div>
 
 
-<!-- 進捗 -->
+  <div class="button-row">
 
-<div
+    <button
+      id="clearFilesButton"
+      class="action secondary"
+    >
+      選択をすべて解除
+    </button>
+
+    <button
+      id="sendButton"
+      class="action primary"
+    >
+      🚀 送信
+    </button>
+
+  </div>
+
+
+  <div
     id="progressArea"
-    class="progress-area"
+    class="progress-area hidden"
+  >
+
+    <div class="progress-label">
+
+      <span id="progressName">
+        送信中…
+      </span>
+
+      <span id="progressPercent">
+        0%
+      </span>
+
+    </div>
+
+    <div class="progress">
+
+      <div
+        id="progressBar"
+        class="progress-bar"
+      ></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     受信
+========================= -->
+
+<section
+  id="receiveCard"
+  class="card hidden"
 >
 
-<div class="progress-bar-background">
+  <h2>
+    📥 受信したファイル
+  </h2>
 
-<div
-    id="progressBar"
-    class="progress-bar"
-></div>
+  <div id="receivedList">
 
-</div>
+    <div
+      id="noReceived"
+      class="connection-info"
+    >
+      まだファイルを受信していません
+    </div>
 
-<div
-    id="progressText"
-    class="progress-text"
->
-0%
-</div>
+  </div>
 
-</div>
+</section>
 
-</div>
-
-
-<!-- ======================================
-     受信画像
-======================================= -->
-
-<div class="card">
-
-<label>📥 受信した画像</label>
-
-<div
-    id="received"
-    class="received-grid"
-></div>
-
-<div
-    id="noReceived"
-    class="info"
->
-まだ画像を受信していません
-</div>
-
-</div>
-
-
-<!-- ======================================
-     ログ
-======================================= -->
-
-<div class="card">
-
-<label>接続ログ</label>
-
-<div
-    id="log"
-    class="log"
-></div>
-
-</div>
 
 </div>
 
 
 <script>
 
+"use strict";
 
-/* =========================================================
-   基本設定
-========================================================= */
+
+/* ========================================
+   設定
+======================================== */
 
 const WORKER_URL =
-    "https://ancient-wind-96c6.rikuhira115.workers.dev";
+  "https://ancient-wind-96c6.rikuhira115.workers.dev";
 
 
-/*
- * Cloudflare STUN
- *
- * TURNは使用しません。
- */
 const ICE_SERVERS = [
-    {
-        urls:
-            "stun:stun.cloudflare.com:3478"
-    }
+
+  {
+    urls:
+      "stun:stun.cloudflare.com:3478"
+  }
+
 ];
 
 
-let pc = null;
+const CHUNK_SIZE =
+  16 * 1024;
 
-let ws = null;
+
+/* ========================================
+   状態
+======================================== */
+
+let socket = null;
+
+let peerConnection = null;
 
 let dataChannel = null;
 
-let role = null;
-
-let roomId = null;
-
-let remoteDescriptionSet = false;
-
-let pendingCandidates = [];
-
-
-/* =========================================================
-   複数ファイル送信用
-========================================================= */
+let selectedColor = null;
 
 let selectedFiles = [];
 
+let peerRole = null;
 
-/* =========================================================
-   受信ファイル
-========================================================= */
+let connected = false;
 
-let receiveBuffers = [];
+let pendingCandidates = [];
 
-let receiveSize = 0;
-
-let receiveFileName = "";
-
-let receiveFileType = "";
-
-let receiveFileSize = 0;
+let incomingFile = null;
 
 
-/* =========================================================
-   ログ
-========================================================= */
+/* ========================================
+   DOM
+======================================== */
 
-function log(message) {
+const pairingCard =
+  document.getElementById(
+    "pairingCard"
+  );
 
-    const time =
-        new Date().toLocaleTimeString();
+const waitingCard =
+  document.getElementById(
+    "waitingCard"
+  );
 
-    const logElement =
-        document.getElementById("log");
+const mainCard =
+  document.getElementById(
+    "mainCard"
+  );
 
-    logElement.textContent +=
-        `[${time}] ${message}\n`;
+const sendCard =
+  document.getElementById(
+    "sendCard"
+  );
 
-    logElement.scrollTop =
-        logElement.scrollHeight;
+const receiveCard =
+  document.getElementById(
+    "receiveCard"
+  );
 
-    console.log(message);
-}
+const fileInput =
+  document.getElementById(
+    "fileInput"
+  );
+
+const fileList =
+  document.getElementById(
+    "fileList"
+  );
+
+const receivedList =
+  document.getElementById(
+    "receivedList"
+  );
+
+const sendButton =
+  document.getElementById(
+    "sendButton"
+  );
+
+const clearFilesButton =
+  document.getElementById(
+    "clearFilesButton"
+  );
+
+const cancelPairButton =
+  document.getElementById(
+    "cancelPairButton"
+  );
+
+const progressArea =
+  document.getElementById(
+    "progressArea"
+  );
+
+const progressBar =
+  document.getElementById(
+    "progressBar"
+  );
+
+const progressName =
+  document.getElementById(
+    "progressName"
+  );
+
+const progressPercent =
+  document.getElementById(
+    "progressPercent"
+  );
 
 
-/* =========================================================
-   ステータス
-========================================================= */
-
-function setStatus(message) {
-
-    document.getElementById("status")
-        .textContent = message;
-}
-
-
-/* =========================================================
-   ファイル選択
-========================================================= */
+/* ========================================
+   色ボタン
+======================================== */
 
 document
-    .getElementById("file")
-    .addEventListener(
-        "change",
-        function() {
+  .querySelectorAll(".color-button")
+  .forEach(button => {
 
-            /*
-             * 新しく選択したファイルを追加
-             */
+    button.addEventListener(
+      "click",
+      () => {
 
-            for (
-                const file of this.files
-            ) {
+        const color =
+          button.dataset.color;
 
-                /*
-                 * 画像だけ許可
-                 */
+        startPairing(color);
 
-                if (
-                    !file.type.startsWith(
-                        "image/"
-                    )
-                ) {
-
-                    continue;
-                }
-
-
-                /*
-                 * 同じファイルが
-                 * 重複して入らないようにする
-                 */
-
-                const alreadyExists =
-                    selectedFiles.some(
-                        existing =>
-                            existing.name ===
-                            file.name &&
-                            existing.size ===
-                            file.size &&
-                            existing.lastModified ===
-                            file.lastModified
-                    );
-
-
-                if (
-                    !alreadyExists
-                ) {
-
-                    selectedFiles.push(
-                        file
-                    );
-                }
-            }
-
-
-            renderSelectedFiles();
-
-
-            /*
-             * inputをリセット
-             *
-             * 同じ画像を再度選択できるようにする
-             */
-
-            this.value = "";
-        }
+      }
     );
 
+  });
 
-/* =========================================================
-   選択ファイル表示
-========================================================= */
+
+/* ========================================
+   ペアリング開始
+======================================== */
+
+function startPairing(color) {
+
+  selectedColor = color;
+
+  pairingCard.classList.add(
+    "hidden"
+  );
+
+  waitingCard.classList.remove(
+    "hidden"
+  );
+
+  selectedColorText.textContent =
+    `選択中：${colorName(color)}`;
+
+  console.log(
+    "ペアリング開始:",
+    color
+  );
+
+
+  const wsUrl =
+    WORKER_URL
+      .replace(/^http/, "ws")
+      + `/pair?color=${encodeURIComponent(color)}`;
+
+
+  socket =
+    new WebSocket(wsUrl);
+
+
+  socket.onopen = () => {
+
+    console.log(
+      "✓ Cloudflare WebSocket接続成功"
+    );
+
+  };
+
+
+  socket.onmessage =
+    async event => {
+
+      try {
+
+        const message =
+          JSON.parse(event.data);
+
+        await handleSignalingMessage(
+          message
+        );
+
+      } catch (error) {
+
+        console.error(
+          "WebSocketメッセージエラー:",
+          error
+        );
+
+      }
+
+    };
+
+
+  socket.onerror = error => {
+
+    console.error(
+      "WebSocketエラー:",
+      error
+    );
+
+    showPairingError(
+      "サーバーとの通信に失敗しました"
+    );
+
+  };
+
+
+  socket.onclose = () => {
+
+    console.log(
+      "WebSocket切断"
+    );
+
+  };
+
+}
+
+
+/* ========================================
+   色名
+======================================== */
+
+function colorName(color) {
+
+  const names = {
+
+    red: "🔴 赤",
+
+    orange: "🟠 オレンジ",
+
+    yellow: "🟡 黄色",
+
+    green: "🟢 緑",
+
+    blue: "🔵 青",
+
+    purple: "🟣 紫"
+
+  };
+
+  return names[color] || color;
+
+}
+
+
+/* ========================================
+   シグナリング
+======================================== */
+
+async function handleSignalingMessage(
+  message
+) {
+
+  console.log(
+    "シグナリング:",
+    message
+  );
+
+
+  if (
+    message.type === "waiting"
+  ) {
+
+    document
+      .getElementById(
+        "waitingTitle"
+      )
+      .textContent =
+      "相手を探しています…";
+
+    document
+      .getElementById(
+        "waitingText"
+      )
+      .textContent =
+      "もう1台で同じ色を選んでください";
+
+    return;
+  }
+
+
+  if (
+    message.type === "paired"
+  ) {
+
+    peerRole =
+      message.role;
+
+    document
+      .getElementById(
+        "waitingTitle"
+      )
+      .textContent =
+      "2台を接続しています…";
+
+    document
+      .getElementById(
+        "waitingText"
+      )
+      .textContent =
+      "WebRTC接続を準備しています";
+
+    await createPeerConnection();
+
+    if (
+      peerRole === "offerer"
+    ) {
+
+      await createOffer();
+
+    }
+
+    return;
+  }
+
+
+  if (
+    message.type === "offer"
+  ) {
+
+    await handleOffer(
+      message.offer
+    );
+
+    return;
+  }
+
+
+  if (
+    message.type === "answer"
+  ) {
+
+    await handleAnswer(
+      message.answer
+    );
+
+    return;
+  }
+
+
+  if (
+    message.type === "candidate"
+  ) {
+
+    await handleCandidate(
+      message.candidate
+    );
+
+    return;
+  }
+
+
+  if (
+    message.type === "peer-left"
+  ) {
+
+    disconnectPeer(
+      "相手の端末が切断しました"
+    );
+
+  }
+
+}
+
+
+/* ========================================
+   WebRTC作成
+======================================== */
+
+async function createPeerConnection() {
+
+  if (peerConnection) {
+    return;
+  }
+
+
+  peerConnection =
+    new RTCPeerConnection({
+      iceServers:
+        ICE_SERVERS
+    });
+
+
+  peerConnection.onicecandidate =
+    event => {
+
+      if (
+        event.candidate
+      ) {
+
+        sendSignal({
+
+          type: "candidate",
+
+          candidate:
+            event.candidate
+
+        });
+
+      }
+
+    };
+
+
+  peerConnection.oniceconnectionstatechange =
+    () => {
+
+      console.log(
+        "ICE状態:",
+        peerConnection.iceConnectionState
+      );
+
+    };
+
+
+  peerConnection.onconnectionstatechange =
+    () => {
+
+      console.log(
+        "WebRTC状態:",
+        peerConnection.connectionState
+      );
+
+
+      if (
+        peerConnection.connectionState ===
+        "connected"
+      ) {
+
+        connected = true;
+
+        showConnected();
+
+      }
+
+
+      if (
+        peerConnection.connectionState ===
+        "failed"
+      ) {
+
+        showPairingError(
+          "WebRTC接続に失敗しました。別のWi-Fiで試してください。"
+        );
+
+      }
+
+    };
+
+
+  /*
+   * Offerer側
+   */
+  if (
+    peerRole === "offerer"
+  ) {
+
+    dataChannel =
+      peerConnection.createDataChannel(
+        "RikuDropFiles",
+        {
+          ordered: true
+        }
+      );
+
+    setupDataChannel(
+      dataChannel
+    );
+
+  }
+
+
+  /*
+   * Answerer側
+   */
+  peerConnection.ondatachannel =
+    event => {
+
+      dataChannel =
+        event.channel;
+
+      setupDataChannel(
+        dataChannel
+      );
+
+    };
+
+}
+
+
+/* ========================================
+   DataChannel
+======================================== */
+
+function setupDataChannel(
+  channel
+) {
+
+  channel.binaryType =
+    "arraybuffer";
+
+
+  channel.bufferedAmountLowThreshold =
+    512 * 1024;
+
+
+  channel.onopen = () => {
+
+    console.log(
+      "✓ DataChannel接続成功"
+    );
+
+    showConnected();
+
+  };
+
+
+  channel.onclose = () => {
+
+    console.log(
+      "DataChannel切断"
+    );
+
+  };
+
+
+  channel.onerror = error => {
+
+    console.error(
+      "DataChannelエラー:",
+      error
+    );
+
+  };
+
+
+  channel.onmessage =
+    event => {
+
+      handleDataMessage(
+        event.data
+      );
+
+    };
+
+}
+
+
+/* ========================================
+   Offer作成
+======================================== */
+
+async function createOffer() {
+
+  const offer =
+    await peerConnection.createOffer();
+
+  await peerConnection.setLocalDescription(
+    offer
+  );
+
+
+  sendSignal({
+
+    type: "offer",
+
+    offer:
+      peerConnection.localDescription
+
+  });
+
+}
+
+
+/* ========================================
+   Offer受信
+======================================== */
+
+async function handleOffer(
+  offer
+) {
+
+  await peerConnection.setRemoteDescription(
+    new RTCSessionDescription(
+      offer
+    )
+  );
+
+
+  await flushCandidates();
+
+
+  const answer =
+    await peerConnection.createAnswer();
+
+  await peerConnection.setLocalDescription(
+    answer
+  );
+
+
+  sendSignal({
+
+    type: "answer",
+
+    answer:
+      peerConnection.localDescription
+
+  });
+
+}
+
+
+/* ========================================
+   Answer受信
+======================================== */
+
+async function handleAnswer(
+  answer
+) {
+
+  await peerConnection.setRemoteDescription(
+    new RTCSessionDescription(
+      answer
+    )
+  );
+
+
+  await flushCandidates();
+
+}
+
+
+/* ========================================
+   ICE Candidate
+======================================== */
+
+async function handleCandidate(
+  candidate
+) {
+
+  if (
+    peerConnection &&
+    peerConnection.remoteDescription
+  ) {
+
+    try {
+
+      await peerConnection.addIceCandidate(
+        candidate
+      );
+
+    } catch (error) {
+
+      console.error(
+        "ICE候補エラー:",
+        error
+      );
+
+    }
+
+  } else {
+
+    pendingCandidates.push(
+      candidate
+    );
+
+  }
+
+}
+
+
+/* ========================================
+   保留中ICE候補
+======================================== */
+
+async function flushCandidates() {
+
+  for (
+    const candidate
+    of pendingCandidates
+  ) {
+
+    try {
+
+      await peerConnection.addIceCandidate(
+        candidate
+      );
+
+    } catch (error) {
+
+      console.error(
+        "ICE候補追加エラー:",
+        error
+      );
+
+    }
+
+  }
+
+  pendingCandidates = [];
+
+}
+
+
+/* ========================================
+   シグナル送信
+======================================== */
+
+function sendSignal(
+  message
+) {
+
+  if (
+    socket &&
+    socket.readyState ===
+    WebSocket.OPEN
+  ) {
+
+    socket.send(
+      JSON.stringify(message)
+    );
+
+  }
+
+}
+
+
+/* ========================================
+   接続成功画面
+======================================== */
+
+function showConnected() {
+
+  if (
+    !dataChannel ||
+    dataChannel.readyState !== "open"
+  ) {
+    return;
+  }
+
+
+  connected = true;
+
+
+  pairingCard.classList.add(
+    "hidden"
+  );
+
+  waitingCard.classList.add(
+    "hidden"
+  );
+
+  mainCard.classList.remove(
+    "hidden"
+  );
+
+  sendCard.classList.remove(
+    "hidden"
+  );
+
+  receiveCard.classList.remove(
+    "hidden"
+  );
+
+
+  document
+    .getElementById(
+      "connectionInfo"
+    )
+    .textContent =
+    `接続方式：WebRTC / ${colorName(selectedColor)}`;
+
+}
+
+
+/* ========================================
+   ファイル選択
+======================================== */
+
+fileInput.addEventListener(
+  "change",
+  () => {
+
+    const files =
+      Array.from(
+        fileInput.files
+      );
+
+    selectedFiles.push(
+      ...files
+    );
+
+    renderSelectedFiles();
+
+    fileInput.value = "";
+
+  }
+);
+
+
+/* ========================================
+   ファイル一覧表示
+======================================== */
 
 function renderSelectedFiles() {
 
-    const container =
-        document.getElementById(
-            "selectedFiles"
+  fileList.innerHTML = "";
+
+
+  if (
+    selectedFiles.length === 0
+  ) {
+
+    fileList.innerHTML =
+      `<div class="connection-info">
+        送信するファイルはありません
+      </div>`;
+
+    return;
+
+  }
+
+
+  selectedFiles.forEach(
+    (file, index) => {
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+      item.className =
+        "file-item";
+
+
+      const icon =
+        document.createElement(
+          "div"
+        );
+
+      icon.className =
+        "file-icon";
+
+      icon.textContent =
+        getFileIcon(file);
+
+
+      const info =
+        document.createElement(
+          "div"
+        );
+
+      info.className =
+        "file-info";
+
+
+      const name =
+        document.createElement(
+          "div"
+        );
+
+      name.className =
+        "file-name";
+
+      name.textContent =
+        file.name;
+
+
+      const size =
+        document.createElement(
+          "div"
+        );
+
+      size.className =
+        "file-size";
+
+      size.textContent =
+        formatBytes(
+          file.size
         );
 
 
-    container.innerHTML = "";
+      info.appendChild(
+        name
+      );
+
+      info.appendChild(
+        size
+      );
 
 
-    if (
-        selectedFiles.length === 0
-    ) {
+      const remove =
+        document.createElement(
+          "button"
+        );
 
-        container.innerHTML =
-            '<div class="info">画像が選択されていません</div>';
+      remove.className =
+        "remove-file";
 
-        return;
-    }
+      remove.textContent =
+        "×";
 
-
-    selectedFiles.forEach(
-        (file, index) => {
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-            item.className =
-                "selected-file";
+      remove.title =
+        "このファイルを削除";
 
 
-            const name =
-                document.createElement(
-                    "div"
-                );
+      remove.addEventListener(
+        "click",
+        () => {
 
-            name.className =
-                "selected-file-name";
+          selectedFiles.splice(
+            index,
+            1
+          );
 
-            name.textContent =
-                `${index + 1}. ${file.name}`;
+          renderSelectedFiles();
 
-
-            const size =
-                document.createElement(
-                    "small"
-                );
-
-            size.textContent =
-                formatFileSize(
-                    file.size
-                );
-
-
-            const removeButton =
-                document.createElement(
-                    "button"
-                );
-
-            removeButton.className =
-                "remove-file";
-
-            removeButton.textContent =
-                "×";
-
-            removeButton.title =
-                "この画像を選択解除";
-
-
-            removeButton.onclick =
-                () => {
-
-                    removeSelectedFile(
-                        index
-                    );
-                };
-
-
-            item.appendChild(
-                name
-            );
-
-            item.appendChild(
-                size
-            );
-
-            item.appendChild(
-                removeButton
-            );
-
-
-            container.appendChild(
-                item
-            );
         }
-    );
+      );
+
+
+      item.appendChild(
+        icon
+      );
+
+      item.appendChild(
+        info
+      );
+
+      item.appendChild(
+        remove
+      );
+
+
+      fileList.appendChild(
+        item
+      );
+
+    }
+  );
 
 }
 
 
-/* =========================================================
-   選択ファイルを1つ解除
-========================================================= */
+/* ========================================
+   ファイルアイコン
+======================================== */
 
-function removeSelectedFile(index) {
+function getFileIcon(file) {
 
-    const file =
-        selectedFiles[index];
-
-
-    if (file) {
-
-        log(
-            "選択解除: " +
-            file.name
-        );
-    }
+  const type =
+    file.type || "";
 
 
-    selectedFiles.splice(
-        index,
-        1
-    );
+  if (
+    type.startsWith("image/")
+  ) {
+    return "🖼️";
+  }
 
 
-    renderSelectedFiles();
+  if (
+    type.startsWith("video/")
+  ) {
+    return "🎥";
+  }
+
+
+  if (
+    type.startsWith("audio/")
+  ) {
+    return "🎵";
+  }
+
+
+  if (
+    type === "application/pdf"
+  ) {
+    return "📕";
+  }
+
+
+  if (
+    file.name
+      .toLowerCase()
+      .endsWith(".zip")
+  ) {
+    return "📦";
+  }
+
+
+  if (
+    type.includes("word") ||
+    file.name
+      .toLowerCase()
+      .match(/\.(doc|docx)$/)
+  ) {
+    return "📝";
+  }
+
+
+  if (
+    type.includes("sheet") ||
+    file.name
+      .toLowerCase()
+      .match(/\.(xls|xlsx)$/)
+  ) {
+    return "📊";
+  }
+
+
+  return "📄";
+
 }
 
 
-/* =========================================================
-   選択ファイルを全部解除
-========================================================= */
+/* ========================================
+   ファイル全解除
+======================================== */
 
-function clearSelectedFiles() {
-
-    if (
-        selectedFiles.length === 0
-    ) {
-
-        return;
-    }
-
-
-    log(
-        selectedFiles.length +
-        "個の画像選択を解除しました"
-    );
-
+clearFilesButton.addEventListener(
+  "click",
+  () => {
 
     selectedFiles = [];
 
-
     renderSelectedFiles();
-}
+
+  }
+);
 
 
-/* =========================================================
-   ファイルサイズ表示
-========================================================= */
+/* ========================================
+   送信
+======================================== */
 
-function formatFileSize(bytes) {
-
-    if (
-        bytes < 1024
-    ) {
-
-        return bytes + " B";
-    }
-
+sendButton.addEventListener(
+  "click",
+  async () => {
 
     if (
-        bytes < 1024 * 1024
+      !connected ||
+      !dataChannel ||
+      dataChannel.readyState !== "open"
     ) {
 
-        return (
-            (bytes / 1024)
-            .toFixed(1)
-            +
-            " KB"
-        );
+      alert(
+        "まだ接続されていません"
+      );
+
+      return;
+
     }
 
-
-    return (
-        (bytes / (1024 * 1024))
-        .toFixed(1)
-        +
-        " MB"
-    );
-}
-
-
-/* =========================================================
-   Cloudflare WebSocket接続
-========================================================= */
-
-function connectSignaling() {
-
-    return new Promise(
-        (resolve, reject) => {
-
-            const url =
-                WORKER_URL +
-                "/room/" +
-                encodeURIComponent(
-                    roomId
-                );
-
-
-            log(
-                "Cloudflare WebSocketへ接続しています..."
-            );
-
-
-            ws =
-                new WebSocket(url);
-
-
-            ws.onopen = () => {
-
-                log(
-                    "✓ Cloudflare WebSocket接続成功"
-                );
-
-                resolve();
-            };
-
-
-            ws.onerror = (error) => {
-
-                log(
-                    "× WebSocketエラー"
-                );
-
-                console.error(error);
-
-                reject(error);
-            };
-
-
-            ws.onclose = () => {
-
-                log(
-                    "Cloudflare WebSocket切断"
-                );
-            };
-
-
-            ws.onmessage =
-                async (event) => {
-
-                    try {
-
-                        const message =
-                            JSON.parse(
-                                event.data
-                            );
-
-
-                        await handleSignal(
-                            message
-                        );
-
-                    } catch (error) {
-
-                        log(
-                            "× 受信データ処理エラー: " +
-                            error.message
-                        );
-                    }
-                };
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   シグナリング送信
-========================================================= */
-
-function sendSignal(message) {
 
     if (
-        ws &&
-        ws.readyState ===
-        WebSocket.OPEN
+      selectedFiles.length === 0
     ) {
 
-        ws.send(
-            JSON.stringify(message)
-        );
+      alert(
+        "送信するファイルを選択してください"
+      );
 
+      return;
 
-        log(
-            "→ シグナリング送信: " +
-            message.type
-        );
-
-    } else {
-
-        log(
-            "× WebSocketが接続されていません"
-        );
-    }
-}
-
-
-/* =========================================================
-   WebRTC作成
-========================================================= */
-
-function createPeerConnection() {
-
-    log(
-        "WebRTC接続を作成します..."
-    );
-
-
-    pc =
-        new RTCPeerConnection({
-            iceServers:
-                ICE_SERVERS
-        });
-
-
-    log(
-        "STUNサーバー: " +
-        "stun.cloudflare.com:3478"
-    );
-
-
-    /* -----------------------------------------
-       ICE候補
-    ----------------------------------------- */
-
-    pc.onicecandidate =
-        (event) => {
-
-            if (
-                event.candidate
-            ) {
-
-                const candidate =
-                    event.candidate;
-
-
-                let type =
-                    "unknown";
-
-
-                const text =
-                    candidate.candidate ||
-                    "";
-
-
-                if (
-                    text.includes(
-                        " typ host "
-                    )
-                ) {
-
-                    type =
-                        "host";
-
-                } else if (
-                    text.includes(
-                        " typ srflx "
-                    )
-                ) {
-
-                    type =
-                        "srflx";
-
-                } else if (
-                    text.includes(
-                        " typ relay "
-                    )
-                ) {
-
-                    type =
-                        "relay";
-                }
-
-
-                log(
-                    `ICE候補: ${type} / ` +
-                    `${candidate.protocol || ""}`
-                );
-
-
-                sendSignal({
-                    type:
-                        "ice-candidate",
-
-                    candidate:
-                        candidate.toJSON()
-                });
-
-
-            } else {
-
-                log(
-                    "✓ ICE候補の収集が終了しました"
-                );
-            }
-
-        };
-
-
-    /* -----------------------------------------
-       ICE候補収集状態
-    ----------------------------------------- */
-
-    pc.onicegatheringstatechange =
-        () => {
-
-            log(
-                "ICE候補収集状態: " +
-                pc.iceGatheringState
-            );
-        };
-
-
-    /* -----------------------------------------
-       ICE接続状態
-    ----------------------------------------- */
-
-    pc.oniceconnectionstatechange =
-        () => {
-
-            log(
-                "🌐 ICE接続状態: " +
-                pc.iceConnectionState
-            );
-
-
-            if (
-                pc.iceConnectionState ===
-                "checking"
-            ) {
-
-                setStatus(
-                    "接続確認中..."
-                );
-            }
-
-
-            if (
-                pc.iceConnectionState ===
-                "connected"
-            ) {
-
-                setStatus(
-                    "🟢 接続しました"
-                );
-
-                log(
-                    "🎉 ICE接続成功！"
-                );
-            }
-
-
-            if (
-                pc.iceConnectionState ===
-                "completed"
-            ) {
-
-                setStatus(
-                    "🟢 接続完了"
-                );
-
-                log(
-                    "🎉 ICE接続完了！"
-                );
-            }
-
-
-            if (
-                pc.iceConnectionState ===
-                "disconnected"
-            ) {
-
-                setStatus(
-                    "🟠 接続が切断されました"
-                );
-            }
-
-
-            if (
-                pc.iceConnectionState ===
-                "failed"
-            ) {
-
-                setStatus(
-                    "🔴 接続失敗"
-                );
-
-                log(
-                    "× ICE接続に失敗しました"
-                );
-            }
-        };
-
-
-    /* -----------------------------------------
-       WebRTC接続状態
-    ----------------------------------------- */
-
-    pc.onconnectionstatechange =
-        () => {
-
-            log(
-                "WebRTC状態: " +
-                pc.connectionState
-            );
-
-
-            if (
-                pc.connectionState ===
-                "connected"
-            ) {
-
-                setStatus(
-                    "🟢 WebRTC接続成功"
-                );
-            }
-
-
-            if (
-                pc.connectionState ===
-                "failed"
-            ) {
-
-                setStatus(
-                    "🔴 WebRTC接続失敗"
-                );
-            }
-        };
-
-
-    /* -----------------------------------------
-       ICEエラー
-    ----------------------------------------- */
-
-    pc.onicecandidateerror =
-        (event) => {
-
-            log(
-                "⚠ ICE候補エラー"
-            );
-
-            log(
-                "   code: " +
-                event.errorCode
-            );
-
-            log(
-                "   text: " +
-                event.errorText
-            );
-        };
-
-
-    /* -----------------------------------------
-       iPhone側
-    ----------------------------------------- */
-
-    if (
-        role === "iphone"
-    ) {
-
-        log(
-            "iPhone側：DataChannelを作成"
-        );
-
-
-        dataChannel =
-            pc.createDataChannel(
-                "rikuDrop"
-            );
-
-
-        setupDataChannel(
-            dataChannel
-        );
     }
 
 
-    /* -----------------------------------------
-       Windows側
-    ----------------------------------------- */
+    sendButton.disabled = true;
 
-    pc.ondatachannel =
-        (event) => {
+    clearFilesButton.disabled = true;
 
-            log(
-                "📦 DataChannelを受信しました"
-            );
-
-
-            dataChannel =
-                event.channel;
-
-
-            setupDataChannel(
-                dataChannel
-            );
-        };
-
-}
-
-
-/* =========================================================
-   DataChannel設定
-========================================================= */
-
-function setupDataChannel(
-    channel
-) {
-
-    channel.binaryType =
-        "arraybuffer";
-
-
-    channel.onopen =
-        () => {
-
-            log(
-                "🎉 DataChannel接続成功！"
-            );
-
-
-            setStatus(
-                "🟢 接続完了・送信できます"
-            );
-
-
-            document.getElementById(
-                "sendButton"
-            ).disabled = false;
-        };
-
-
-    channel.onclose =
-        () => {
-
-            log(
-                "DataChannel切断"
-            );
-
-
-            document.getElementById(
-                "sendButton"
-            ).disabled = true;
-        };
-
-
-    channel.onerror =
-        (error) => {
-
-            log(
-                "× DataChannelエラー"
-            );
-
-            console.error(error);
-        };
-
-
-    channel.onmessage =
-        (event) => {
-
-            handleDataMessage(
-                event.data
-            );
-        };
-
-}
-
-
-/* =========================================================
-   シグナリング受信
-========================================================= */
-
-async function handleSignal(
-    message
-) {
-
-    if (!pc) {
-
-        return;
-    }
-
-
-    /* -----------------------------------------
-       Offer
-    ----------------------------------------- */
-
-    if (
-        message.type ===
-        "offer"
-    ) {
-
-        log(
-            "← Offer受信"
-        );
-
-
-        await pc.setRemoteDescription(
-            new RTCSessionDescription(
-                message.offer
-            )
-        );
-
-
-        remoteDescriptionSet =
-            true;
-
-
-        log(
-            "✓ Offer設定完了"
-        );
-
-
-        await addPendingCandidates();
-
-
-        const answer =
-            await pc.createAnswer();
-
-
-        await pc.setLocalDescription(
-            answer
-        );
-
-
-        log(
-            "Answer作成"
-        );
-
-
-        sendSignal({
-            type:
-                "answer",
-
-            answer:
-                answer
-        });
-
-
-        log(
-            "→ Answer送信"
-        );
-    }
-
-
-    /* -----------------------------------------
-       Answer
-    ----------------------------------------- */
-
-    else if (
-        message.type ===
-        "answer"
-    ) {
-
-        log(
-            "← Answer受信"
-        );
-
-
-        await pc.setRemoteDescription(
-            new RTCSessionDescription(
-                message.answer
-            )
-        );
-
-
-        remoteDescriptionSet =
-            true;
-
-
-        log(
-            "✓ Answer設定完了"
-        );
-
-
-        await addPendingCandidates();
-    }
-
-
-    /* -----------------------------------------
-       ICE Candidate
-    ----------------------------------------- */
-
-    else if (
-        message.type ===
-        "ice-candidate"
-    ) {
-
-        const candidate =
-            new RTCIceCandidate(
-                message.candidate
-            );
-
-
-        if (
-            remoteDescriptionSet
-        ) {
-
-            try {
-
-                await pc.addIceCandidate(
-                    candidate
-                );
-
-
-                log(
-                    "✓ ICE候補を追加しました"
-                );
-
-            } catch (error) {
-
-                log(
-                    "× ICE候補追加失敗: " +
-                    error.message
-                );
-            }
-
-        } else {
-
-            pendingCandidates.push(
-                candidate
-            );
-
-
-            log(
-                "ICE候補を一時保存しました"
-            );
-        }
-    }
-
-}
-
-
-/* =========================================================
-   待機中ICE候補
-========================================================= */
-
-async function addPendingCandidates() {
-
-    for (
-        const candidate
-        of pendingCandidates
-    ) {
-
-        try {
-
-            await pc.addIceCandidate(
-                candidate
-            );
-
-
-            log(
-                "✓ 保存していたICE候補を追加"
-            );
-
-        } catch (error) {
-
-            log(
-                "× 保存候補追加失敗: " +
-                error.message
-            );
-        }
-    }
-
-
-    pendingCandidates = [];
-}
-
-
-/* =========================================================
-   起動
-========================================================= */
-
-async function start(
-    selectedRole
-) {
-
-    if (
-        !document
-            .getElementById("room")
-            .value
-            .trim()
-    ) {
-
-        alert(
-            "部屋番号を入力してください"
-        );
-
-        return;
-    }
-
-
-    roomId =
-        document
-            .getElementById("room")
-            .value
-            .trim();
-
-
-    role =
-        selectedRole;
-
-
-    log(
-        "================================"
-    );
-
-    log(
-        "RikuDrop開始"
-    );
-
-    log(
-        "役割: " +
-        role
-    );
-
-    log(
-        "部屋: " +
-        roomId
-    );
-
-    log(
-        "================================"
-    );
-
-
-    setStatus(
-        "接続準備中..."
+    progressArea.classList.remove(
+      "hidden"
     );
 
 
     try {
 
-        createPeerConnection();
-
-
-        await connectSignaling();
-
-
-        setStatus(
-            "🟡 相手を待っています..."
-        );
-
-
-        /*
-         * iPhoneがOfferを作成
-         */
-
-        if (
-            role === "iphone"
-        ) {
-
-            log(
-                "iPhone側の準備完了"
-            );
-
-
-            log(
-                "Offerを作成します..."
-            );
-
-
-            const offer =
-                await pc.createOffer();
-
-
-            await pc.setLocalDescription(
-                offer
-            );
-
-
-            log(
-                "Offer作成完了"
-            );
-
-
-            sendSignal({
-                type:
-                    "offer",
-
-                offer:
-                    offer
-            });
-
-
-            log(
-                "✓ Offer送信"
-            );
-
-
-        } else {
-
-            log(
-                "Windows側の準備完了"
-            );
-
-
-            log(
-                "iPhone側の接続を待っています..."
-            );
-        }
-
-
-    } catch (error) {
-
-        console.error(error);
-
-
-        log(
-            "× 起動エラー: " +
-            error.message
-        );
-
-
-        setStatus(
-            "🔴 エラー"
-        );
-    }
-
-}
-
-
-/* =========================================================
-   複数ファイル送信
-========================================================= */
-
-async function sendFiles() {
-
-    if (
-        !dataChannel ||
-        dataChannel.readyState !==
-        "open"
-    ) {
-
-        alert(
-            "まだ接続されていません"
-        );
-
-        return;
-    }
-
-
-    if (
-        selectedFiles.length === 0
-    ) {
-
-        alert(
-            "送信する画像を選択してください"
-        );
-
-        return;
-    }
-
-
-    const files =
+      /*
+       * コピーしておく
+       */
+      const files =
         [...selectedFiles];
 
 
-    log(
-        "================================"
-    );
+      for (
+        let i = 0;
+        i < files.length;
+        i++
+      ) {
 
-
-    log(
-        `📤 ${files.length}個の画像を送信開始`
-    );
-
-
-    document.getElementById(
-        "sendButton"
-    ).disabled = true;
-
-
-    document.getElementById(
-        "progressArea"
-    ).style.display =
-        "block";
-
-
-    try {
-
-        /*
-         * 1枚ずつ順番に送信
-         */
-
-        for (
-            let i = 0;
-            i < files.length;
-            i++
-        ) {
-
-            const file =
-                files[i];
-
-
-            log(
-                `📤 [${i + 1}/${files.length}] ${file.name}`
-            );
-
-
-            await sendSingleFile(
-                file,
-                i,
-                files.length
-            );
-        }
-
-
-        log(
-            "🎉 すべての画像を送信しました！"
+        await sendFile(
+          files[i],
+          i + 1,
+          files.length
         );
 
-
-        setProgress(
-            100,
-            "送信完了！"
-        );
+      }
 
 
-        setStatus(
-            "🟢 送信完了"
-        );
+      progressName.textContent =
+        "送信完了";
+
+      progressPercent.textContent =
+        "100%";
+
+      progressBar.style.width =
+        "100%";
+
+
+      setTimeout(
+        () => {
+
+          progressArea.classList.add(
+            "hidden"
+          );
+
+        },
+        1500
+      );
 
 
     } catch (error) {
 
-        log(
-            "× 送信エラー: " +
-            error.message
-        );
+      console.error(
+        "ファイル送信エラー:",
+        error
+      );
 
-
-        setStatus(
-            "🔴 送信エラー"
-        );
-
+      alert(
+        "ファイルの送信に失敗しました"
+      );
 
     } finally {
 
-        document.getElementById(
-            "sendButton"
-        ).disabled = false;
+      sendButton.disabled = false;
+
+      clearFilesButton.disabled = false;
+
     }
 
-}
+  }
+);
 
 
-/* =========================================================
-   1枚のファイルを送信
-========================================================= */
+/* ========================================
+   1ファイル送信
+======================================== */
 
-async function sendSingleFile(
-    file,
-    fileIndex,
-    totalFiles
+async function sendFile(
+  file,
+  index,
+  total
 ) {
 
+  const fileId =
+    crypto.randomUUID();
+
+
+  /*
+   * ファイル情報を先に送る
+   */
+  dataChannel.send(
+    JSON.stringify({
+
+      type: "file-start",
+
+      id: fileId,
+
+      name: file.name,
+
+      size: file.size,
+
+      mime:
+        file.type ||
+        "application/octet-stream"
+
+    })
+  );
+
+
+  progressName.textContent =
+    `${file.name} (${index}/${total})`;
+
+  progressPercent.textContent =
+    "0%";
+
+  progressBar.style.width =
+    "0%";
+
+
+  let offset = 0;
+
+
+  while (
+    offset < file.size
+  ) {
+
     /*
-     * ファイル情報
+     * DataChannelのバッファが
+     * 大きくなりすぎないように待つ
      */
+    await waitForBuffer();
 
-    dataChannel.send(
-        JSON.stringify({
 
-            type:
-                "file-info",
+    const end =
+      Math.min(
+        offset + CHUNK_SIZE,
+        file.size
+      );
 
-            name:
-                file.name,
 
-            size:
-                file.size,
-
-            mime:
-                file.type,
-
-            fileIndex:
-                fileIndex,
-
-            totalFiles:
-                totalFiles
-
-        })
-    );
+    const blob =
+      file.slice(
+        offset,
+        end
+      );
 
 
     const buffer =
-        await file.arrayBuffer();
+      await blob.arrayBuffer();
 
-
-    const chunkSize =
-        16 * 1024;
-
-
-    let offset = 0;
-
-
-    while (
-        offset <
-        buffer.byteLength
-    ) {
-
-        const chunk =
-            buffer.slice(
-                offset,
-                Math.min(
-                    offset +
-                    chunkSize,
-
-                    buffer.byteLength
-                )
-            );
-
-
-        dataChannel.send(
-            chunk
-        );
-
-
-        offset +=
-            chunk.byteLength;
-
-
-        /*
-         * 現在の画像の進捗
-         */
-
-        const filePercent =
-            Math.floor(
-                offset /
-                buffer.byteLength *
-                100
-            );
-
-
-        /*
-         * 全体の進捗
-         */
-
-        const totalPercent =
-            Math.floor(
-                (
-                    fileIndex +
-                    offset /
-                    buffer.byteLength
-                )
-                /
-                totalFiles *
-                100
-            );
-
-
-        setProgress(
-            totalPercent,
-
-            `${fileIndex + 1}/${totalFiles}枚目 ` +
-            `${filePercent}%`
-        );
-
-
-        /*
-         * バッファが膨らみすぎないようにする
-         */
-
-        if (
-            dataChannel.bufferedAmount >
-            1024 * 1024
-        ) {
-
-            await waitForBuffer();
-        }
-    }
-
-
-    /*
-     * この画像の終了
-     */
 
     dataChannel.send(
-        JSON.stringify({
-
-            type:
-                "file-end"
-
-        })
+      buffer
     );
 
 
-    log(
-        `✓ ${file.name} 送信完了`
-    );
+    offset = end;
+
+
+    const percent =
+      file.size === 0
+        ? 100
+        : Math.floor(
+            (offset /
+              file.size) *
+            100
+          );
+
+
+    progressPercent.textContent =
+      `${percent}%`;
+
+    progressBar.style.width =
+      `${percent}%`;
 
 
     /*
-     * 次のファイルに進む前に
-     * 少し待つ
+     * UIを固めない
      */
-
-    await sleep(100);
-}
-
-
-/* =========================================================
-   DataChannelバッファ待ち
-========================================================= */
-
-function waitForBuffer() {
-
-    return new Promise(
-        resolve => {
-
-            const check =
-                () => {
-
-                    if (
-                        dataChannel.bufferedAmount <
-                        256 * 1024
-                    ) {
-
-                        resolve();
-
-                    } else {
-
-                        setTimeout(
-                            check,
-                            20
-                        );
-                    }
-                };
-
-
-            check();
-        }
-    );
-}
-
-
-/* =========================================================
-   待機
-========================================================= */
-
-function sleep(ms) {
-
-    return new Promise(
-        resolve =>
-            setTimeout(
-                resolve,
-                ms
-            )
-    );
-}
-
-
-/* =========================================================
-   進捗表示
-========================================================= */
-
-function setProgress(
-    percent,
-    text
-) {
-
-    document.getElementById(
-        "progressBar"
-    ).style.width =
-        percent + "%";
-
-
-    document.getElementById(
-        "progressText"
-    ).textContent =
-        text;
-}
-
-
-/* =========================================================
-   データ受信
-========================================================= */
-
-function handleDataMessage(
-    data
-) {
-
-    /*
-     * 文字列
-     */
-
-    if (
-        typeof data ===
-        "string"
-    ) {
-
-        try {
-
-            const message =
-                JSON.parse(data);
-
-
-            /* --------------------------------
-               ファイル開始
-            -------------------------------- */
-
-            if (
-                message.type ===
-                "file-info"
-            ) {
-
-                receiveBuffers = [];
-
-                receiveSize = 0;
-
-                receiveFileName =
-                    message.name;
-
-                receiveFileType =
-                    message.mime;
-
-                receiveFileSize =
-                    message.size;
-
-
-                log(
-                    `📥 [${message.fileIndex + 1}/${message.totalFiles}] ` +
-                    `${receiveFileName} 受信開始`
-                );
-
-
-                setStatus(
-                    "📥 画像受信中..."
-                );
-            }
-
-
-            /* --------------------------------
-               ファイル終了
-            -------------------------------- */
-
-            else if (
-                message.type ===
-                "file-end"
-            ) {
-
-                finishReceive();
-            }
-
-
-        } catch (error) {
-
-            log(
-                "文字列データ受信: " +
-                data
-            );
-        }
-
-
-        return;
-    }
-
-
-    /*
-     * バイナリデータ
-     */
-
-    if (
-        data instanceof ArrayBuffer
-    ) {
-
-        receiveBuffers.push(
-            data
-        );
-
-
-        receiveSize +=
-            data.byteLength;
-
-
-        const percent =
-            receiveFileSize
-                ? Math.floor(
-                    receiveSize /
-                    receiveFileSize *
-                    100
-                )
-                : 0;
-
-
-        setStatus(
-            `📥 ${receiveFileName} ` +
-            `${percent}%`
-        );
-    }
-
-}
-
-
-/* =========================================================
-   受信完了
-========================================================= */
-
-function finishReceive() {
-
-    const blob =
-        new Blob(
-            receiveBuffers,
-            {
-                type:
-                    receiveFileType ||
-                    "image/jpeg"
-            }
-        );
-
-
-    const url =
-        URL.createObjectURL(
-            blob
-        );
-
-
-    /*
-     * 受信画像エリア
-     */
-
-    const container =
-        document.getElementById(
-            "received"
-        );
-
-
-    /*
-     * 「まだ受信していません」を消す
-     */
-
-    document.getElementById(
-        "noReceived"
-    ).style.display =
-        "none";
-
-
-    /*
-     * 画像カード
-     */
-
-    const item =
-        document.createElement(
-            "div"
-        );
-
-    item.className =
-        "received-item";
-
-
-    /*
-     * 画像
-     */
-
-    const img =
-        document.createElement(
-            "img"
-        );
-
-
-    img.src =
-        url;
-
-
-    img.alt =
-        receiveFileName;
-
-
-    /*
-     * ファイル名
-     */
-
-    const name =
-        document.createElement(
-            "div"
-        );
-
-
-    name.className =
-        "received-name";
-
-
-    name.textContent =
-        receiveFileName;
-
-
-    /*
-     * ダウンロードボタン
-     */
-
-    const downloadButton =
-        document.createElement(
-            "button"
-        );
-
-
-    downloadButton.className =
-        "download-button";
-
-
-    downloadButton.textContent =
-        "📥 ダウンロード";
-
-
-    downloadButton.onclick =
-        () => {
-
-            downloadFile(
-                blob,
-                receiveFileName
-            );
-        };
-
-
-    /*
-     * カードに追加
-     */
-
-    item.appendChild(
-        img
-    );
-
-    item.appendChild(
-        name
-    );
-
-    item.appendChild(
-        downloadButton
-    );
-
-
-    container.appendChild(
-        item
-    );
-
-
-    log(
-        "🎉 " +
-        receiveFileName +
-        " の受信完了！"
-    );
-
-
-    log(
-        "受信サイズ: " +
-        formatFileSize(
-            receiveSize
+    await new Promise(
+      resolve =>
+        setTimeout(
+          resolve,
+          0
         )
     );
 
-
-    setStatus(
-        "🟢 画像受信完了"
-    );
+  }
 
 
-    /*
-     * 次の画像を受信できるように
-     * リセット
-     */
+  /*
+   * ファイル終了
+   */
+  dataChannel.send(
+    JSON.stringify({
 
-    receiveBuffers = [];
+      type: "file-end",
 
-    receiveSize = 0;
+      id: fileId
 
-    receiveFileName = "";
+    })
+  );
 
-    receiveFileType = "";
-
-    receiveFileSize = 0;
 }
 
 
-/* =========================================================
-   ダウンロード
-========================================================= */
+/* ========================================
+   DataChannelバッファ待ち
+======================================== */
 
-function downloadFile(
-    blob,
-    fileName
-) {
+function waitForBuffer() {
 
-    const url =
-        URL.createObjectURL(
-            blob
-        );
+  return new Promise(
+    resolve => {
 
+      if (
+        dataChannel.bufferedAmount
+        < 1024 * 1024
+      ) {
 
-    const a =
-        document.createElement(
-            "a"
-        );
+        resolve();
 
+        return;
 
-    a.href =
-        url;
+      }
 
 
-    a.download =
-        fileName;
-
-
-    document.body.appendChild(
-        a
-    );
-
-
-    a.click();
-
-
-    a.remove();
-
-
-    /*
-     * 少し待ってURLを解放
-     */
-
-    setTimeout(
+      const check =
         () => {
 
-            URL.revokeObjectURL(
-                url
+          if (
+            !dataChannel ||
+            dataChannel.readyState !==
+              "open"
+          ) {
+
+            resolve();
+
+            return;
+
+          }
+
+
+          if (
+            dataChannel.bufferedAmount
+            < 512 * 1024
+          ) {
+
+            resolve();
+
+          } else {
+
+            setTimeout(
+              check,
+              20
             );
 
-        },
-        1000
-    );
+          }
+
+        };
 
 
-    log(
-        "📥 ダウンロード: " +
-        fileName
-    );
+      check();
+
+    }
+  );
+
 }
 
 
-/* =========================================================
-   ページ読み込み
-========================================================= */
+/* ========================================
+   受信データ
+======================================== */
 
-window.addEventListener(
-    "load",
+function handleDataMessage(
+  data
+) {
+
+  /*
+   * JSONメッセージ
+   */
+  if (
+    typeof data === "string"
+  ) {
+
+    let message;
+
+    try {
+
+      message =
+        JSON.parse(data);
+
+    } catch (error) {
+
+      return;
+
+    }
+
+
+    if (
+      message.type ===
+      "file-start"
+    ) {
+
+      incomingFile = {
+
+        id:
+          message.id,
+
+        name:
+          message.name,
+
+        size:
+          message.size,
+
+        mime:
+          message.mime,
+
+        chunks: [],
+
+        received: 0
+
+      };
+
+
+      console.log(
+        "受信開始:",
+        message.name
+      );
+
+
+      return;
+
+    }
+
+
+    if (
+      message.type ===
+      "file-end"
+    ) {
+
+      finishIncomingFile();
+
+      return;
+
+    }
+
+    return;
+
+  }
+
+
+  /*
+   * バイナリデータ
+   */
+  if (
+    data instanceof ArrayBuffer
+  ) {
+
+    receiveChunk(
+      data
+    );
+
+    return;
+
+  }
+
+
+  if (
+    data instanceof Blob
+  ) {
+
+    data.arrayBuffer()
+      .then(
+        buffer =>
+          receiveChunk(
+            buffer
+          )
+      );
+
+  }
+
+}
+
+
+/* ========================================
+   受信チャンク
+======================================== */
+
+function receiveChunk(
+  buffer
+) {
+
+  if (!incomingFile) {
+    return;
+  }
+
+
+  incomingFile.chunks.push(
+    buffer
+  );
+
+  incomingFile.received +=
+    buffer.byteLength;
+
+
+  /*
+   * 受信進捗を表示
+   */
+  const percent =
+    incomingFile.size === 0
+      ? 100
+      : Math.floor(
+          (
+            incomingFile.received /
+            incomingFile.size
+          ) * 100
+        );
+
+
+  console.log(
+    `受信中 ${percent}%`
+  );
+
+}
+
+
+/* ========================================
+   ファイル完成
+======================================== */
+
+function finishIncomingFile() {
+
+  if (!incomingFile) {
+    return;
+  }
+
+
+  const file =
+    new File(
+      incomingFile.chunks,
+
+      incomingFile.name,
+
+      {
+        type:
+          incomingFile.mime
+      }
+    );
+
+
+  addReceivedFile(
+    file
+  );
+
+
+  console.log(
+    "受信完了:",
+    file.name
+  );
+
+
+  incomingFile = null;
+
+}
+
+
+/* ========================================
+   受信ファイル表示
+======================================== */
+
+function addReceivedFile(
+  file
+) {
+
+  const noReceived =
+    document.getElementById(
+      "noReceived"
+    );
+
+
+  if (noReceived) {
+    noReceived.remove();
+  }
+
+
+  const item =
+    document.createElement(
+      "div"
+    );
+
+  item.className =
+    "received-item";
+
+
+  /*
+   * 画像ならプレビュー
+   */
+  if (
+    file.type.startsWith(
+      "image/"
+    )
+  ) {
+
+    const img =
+      document.createElement(
+        "img"
+      );
+
+    img.className =
+      "received-preview";
+
+    const url =
+      URL.createObjectURL(
+        file
+      );
+
+    img.src = url;
+
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+    };
+
+
+    item.appendChild(
+      img
+    );
+
+  } else {
+
+    const icon =
+      document.createElement(
+        "div"
+      );
+
+    icon.className =
+      "received-icon";
+
+    icon.textContent =
+      getFileIcon(file);
+
+
+    item.appendChild(
+      icon
+    );
+
+  }
+
+
+  const info =
+    document.createElement(
+      "div"
+    );
+
+  info.className =
+    "received-info";
+
+
+  const name =
+    document.createElement(
+      "div"
+    );
+
+  name.className =
+    "received-name";
+
+  name.textContent =
+    file.name;
+
+
+  const size =
+    document.createElement(
+      "div"
+    );
+
+  size.className =
+    "received-size";
+
+  size.textContent =
+    formatBytes(
+      file.size
+    );
+
+
+  info.appendChild(
+    name
+  );
+
+  info.appendChild(
+    size
+  );
+
+
+  const download =
+    document.createElement(
+      "button"
+    );
+
+  download.className =
+    "download-button";
+
+  download.textContent =
+    "📥 ダウンロード";
+
+
+  download.addEventListener(
+    "click",
     () => {
 
-        log(
-            "RikuDrop起動"
-        );
+      downloadFile(
+        file
+      );
 
-
-        log(
-            "Cloudflare STUNを使用します"
-        );
-
-
-        log(
-            "STUN: " +
-            "stun.cloudflare.com:3478"
-        );
-
-
-        log(
-            "TURN: 使用しません"
-        );
-
-
-        log(
-            "カード情報: 不要"
-        );
-
-
-        renderSelectedFiles();
     }
+  );
+
+
+  item.appendChild(
+    info
+  );
+
+  item.appendChild(
+    download
+  );
+
+
+  receivedList.prepend(
+    item
+  );
+
+}
+
+
+/* ========================================
+   ダウンロード
+======================================== */
+
+function downloadFile(
+  file
+) {
+
+  const url =
+    URL.createObjectURL(
+      file
+    );
+
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+  a.href =
+    url;
+
+  a.download =
+    file.name;
+
+
+  document.body.appendChild(
+    a
+  );
+
+  a.click();
+
+  a.remove();
+
+
+  setTimeout(
+    () => {
+
+      URL.revokeObjectURL(
+        url
+      );
+
+    },
+    1000
+  );
+
+}
+
+
+/* ========================================
+   サイズ表示
+======================================== */
+
+function formatBytes(
+  bytes
+) {
+
+  if (
+    bytes === 0
+  ) {
+    return "0 B";
+  }
+
+
+  const units = [
+    "B",
+    "KB",
+    "MB",
+    "GB",
+    "TB"
+  ];
+
+
+  const index =
+    Math.floor(
+      Math.log(bytes) /
+      Math.log(1024)
+    );
+
+
+  return (
+    bytes /
+    Math.pow(
+      1024,
+      index
+    )
+  ).toFixed(
+    index === 0 ? 0 : 1
+  )
+  + " "
+  + units[index];
+
+}
+
+
+/* ========================================
+   ペアリングキャンセル
+======================================== */
+
+cancelPairButton.addEventListener(
+  "click",
+  () => {
+
+    disconnectAll();
+
+    pairingCard.classList.remove(
+      "hidden"
+    );
+
+    waitingCard.classList.add(
+      "hidden"
+    );
+
+  }
 );
+
+
+/* ========================================
+   エラー表示
+======================================== */
+
+function showPairingError(
+  message
+) {
+
+  document
+    .getElementById(
+      "waitingTitle"
+    )
+    .textContent =
+    "⚠️ 接続できませんでした";
+
+  document
+    .getElementById(
+      "waitingText"
+    )
+    .textContent =
+    message;
+
+}
+
+
+/* ========================================
+   切断
+======================================== */
+
+function disconnectPeer(
+  message
+) {
+
+  connected = false;
+
+  if (peerConnection) {
+
+    try {
+      peerConnection.close();
+    } catch (error) {}
+
+  }
+
+  peerConnection = null;
+
+  dataChannel = null;
+
+  pendingCandidates = [];
+
+
+  mainCard.classList.add(
+    "hidden"
+  );
+
+  sendCard.classList.add(
+    "hidden"
+  );
+
+  receiveCard.classList.add(
+    "hidden"
+  );
+
+
+  waitingCard.classList.remove(
+    "hidden"
+  );
+
+
+  document
+    .getElementById(
+      "waitingTitle"
+    )
+    .textContent =
+    message;
+
+}
+
+
+function disconnectAll() {
+
+  try {
+
+    if (socket) {
+      socket.close();
+    }
+
+  } catch (error) {}
+
+
+  try {
+
+    if (dataChannel) {
+      dataChannel.close();
+    }
+
+  } catch (error) {}
+
+
+  try {
+
+    if (peerConnection) {
+      peerConnection.close();
+    }
+
+  } catch (error) {}
+
+
+  socket = null;
+
+  dataChannel = null;
+
+  peerConnection = null;
+
+  connected = false;
+
+  pendingCandidates = [];
+
+}
+
+
+/* ========================================
+   初期表示
+======================================== */
+
+renderSelectedFiles();
 
 </script>
 
